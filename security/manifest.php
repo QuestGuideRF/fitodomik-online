@@ -16,5 +16,5 @@ if (!file_exists($file_path) || !is_file($file_path)) {
     exit("Файл не найден");
 }
 header("Content-Type: application/manifest+json");
-header("Cache-Control: public, max-age=604800"); 
-readfile($file_path); 
+header("Cache-Control: public, max-age=604800");
+readfile($file_path);

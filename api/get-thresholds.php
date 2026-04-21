@@ -3,11 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../config/database.php';
-require_once '../config/headers.php'; 
+require_once '../config/headers.php';
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: X-Auth-Token');
-set_ajax_cache_headers(true, 300); 
+set_ajax_cache_headers(true, 300);
 function log_message($message) {
     $log_dir = dirname(__FILE__) . '/../logs';
     if (!is_dir($log_dir)) {
@@ -34,9 +34,9 @@ try {
         exit;
     }
     $stmt = $pdo->prepare("
-        SELECT COUNT(*) 
-        FROM information_schema.TABLES 
-        WHERE TABLE_SCHEMA = DATABASE() 
+        SELECT COUNT(*)
+        FROM information_schema.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
         AND TABLE_NAME = 'alarm_thresholds'
     ");
     $stmt->execute();
@@ -64,8 +64,8 @@ try {
             ['co2', 600.0, 1500.0, 1000.0, 100.0]
         ];
         $stmt = $pdo->prepare("
-            INSERT INTO alarm_thresholds 
-            (user_id, parameter_type, min_limit, max_limit, target_value, tolerance) 
+            INSERT INTO alarm_thresholds
+            (user_id, parameter_type, min_limit, max_limit, target_value, tolerance)
             VALUES (?, ?, ?, ?, ?, ?)
         ");
         foreach ($defaultThresholds as $threshold) {
@@ -74,8 +74,8 @@ try {
         log_message("Таблица alarm_thresholds создана и заполнена данными по умолчанию");
     }
     $stmt = $pdo->prepare("
-        SELECT parameter_type, min_limit, max_limit, target_value, tolerance 
-        FROM alarm_thresholds 
+        SELECT parameter_type, min_limit, max_limit, target_value, tolerance
+        FROM alarm_thresholds
         WHERE user_id = ?
     ");
     $stmt->execute([$user['id']]);
@@ -97,8 +97,8 @@ try {
             ['co2', 600.0, 1500.0, 1000.0, 100.0]
         ];
         $stmt = $pdo->prepare("
-            INSERT INTO alarm_thresholds 
-            (user_id, parameter_type, min_limit, max_limit, target_value, tolerance) 
+            INSERT INTO alarm_thresholds
+            (user_id, parameter_type, min_limit, max_limit, target_value, tolerance)
             VALUES (?, ?, ?, ?, ?, ?)
         ");
         foreach ($defaultThresholds as $threshold) {
@@ -128,4 +128,4 @@ try {
         'message' => 'Ошибка сервера: ' . $e->getMessage()
     ]);
 }
-?> 
+?>

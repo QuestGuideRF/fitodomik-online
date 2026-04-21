@@ -39,4 +39,4 @@ function sendAlarmNotification($user_id, $message) {
         error_log("Error sending Telegram notification: " . $e->getMessage());
         return false;
     }
-} 
+}

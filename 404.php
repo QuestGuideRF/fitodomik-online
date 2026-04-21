@@ -100,12 +100,12 @@ header("HTTP/1.0 404 Not Found");
             border: 1px solid rgba(76, 175, 80, 0.3);
         }
         [data-theme="dark"] .error-message {
-            color: #ffffff;
+            color:
             background-color: rgba(76, 175, 80, 0.15);
             border-color: rgba(76, 175, 80, 0.5);
         }
         [data-theme="light"] .error-message {
-            color: #333333;
+            color:
             background-color: rgba(76, 175, 80, 0.05);
             border-color: rgba(76, 175, 80, 0.3);
         }
@@ -120,7 +120,7 @@ header("HTTP/1.0 404 Not Found");
             transition: background-color 0.3s;
         }
         .back-button:hover {
-            background-color: #3d8b40;
+            background-color:
         }
         @media (max-width: 600px) {
             .error-code {
@@ -145,4 +145,4 @@ header("HTTP/1.0 404 Not Found");
         <meta itemprop="dateModified" content="<?php echo date('c'); ?>">
     </div>
 </body>
-</html> 
+</html>

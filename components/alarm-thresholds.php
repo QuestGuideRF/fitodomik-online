@@ -3,9 +3,9 @@ require_once 'config/database.php';
 $isGuest = !isset($_SESSION['user_id']);
 $user_id = $isGuest ? 1 : $_SESSION['user_id'];
 $stmt = $pdo->prepare("
-    SELECT COUNT(*) 
-    FROM information_schema.TABLES 
-    WHERE TABLE_SCHEMA = DATABASE() 
+    SELECT COUNT(*)
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = DATABASE()
     AND TABLE_NAME = 'alarm_thresholds'
 ");
 $stmt->execute();
@@ -166,29 +166,29 @@ function formatNumberNoCommas($number) {
 .accordion-icon{transition:transform 0.3s ease}
 .accordion-icon.rotate{transform:rotate(180deg)}
 .form-group{margin-bottom:20px}
-.form-group h3{margin:0 0 10px 0;font-size:16px;color:var(--text-color,#fff)}
+.form-group h3{margin:0 0 10px 0;font-size:16px;color:var(--text-color,
 .input-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .input-group{flex:1;min-width:140px}
-.input-group label{display:block;margin-bottom:5px;color:var(--text-color,#fff)}
-.input-group input{width:100%;padding:8px;border:1px solid var(--border-color,#444);border-radius:4px;background:var(--input-bg,#333);color:var(--text-color,#fff)}
-[data-theme="light"] .input-group input{background:var(--input-bg,#fff);color:var(--text-color,#000);border-color:var(--border-color,#ddd)}
-.current-limits{margin:5px 0;color:var(--secondary-text,#888)}
-.btn-save{background-color:#4CAF50;color:white;padding:12px 24px;border:none;border-radius:8px;font-size:16px;cursor:pointer;margin-top:20px;width:200px;float:right}
-.guest-notice{background-color:rgba(255,193,7,0.2);border-left:4px solid #ffc107;padding:15px;margin:10px 0;border-radius:4px;text-align:center}
-.guest-notice p{margin:0;color:var(--text-color,#555);font-size:16px}
-.guest-notice a{color:#007bff;text-decoration:none;font-weight:bold}
+.input-group label{display:block;margin-bottom:5px;color:var(--text-color,
+.input-group input{width:100%;padding:8px;border:1px solid var(--border-color,
+[data-theme="light"] .input-group input{background:var(--input-bg,
+.current-limits{margin:5px 0;color:var(--secondary-text,
+.btn-save{background-color:
+.guest-notice{background-color:rgba(255,193,7,0.2);border-left:4px solid
+.guest-notice p{margin:0;color:var(--text-color,
+.guest-notice a{color:
 .guest-notice a:hover{text-decoration:underline}
-button[disabled]{background-color:#cccccc !important;cursor:not-allowed !important}
+button[disabled]{background-color:
 @media (max-width:480px){.input-row{flex-direction:column;gap:10px}.input-group{width:100%}.form-group{margin-bottom:30px}.btn-save{width:100%;margin-top:30px}.current-limits{font-size:0.9rem;margin-bottom:15px}}
 .form-group h3{font-size:1.1rem;margin-bottom:15px;font-weight:600}
 .input-group label{font-size:0.95rem;margin-bottom:8px}
 .input-group input{font-size:1rem;padding:10px}
 .current-limits{font-size:0.9rem;opacity:0.8;margin:10px 0}
 .btn-save{transition:background-color 0.2s ease;font-weight:500}
-.btn-save:hover:not([disabled]){background-color:#45a049}
+.btn-save:hover:not([disabled]){background-color:
 .btn-save:active:not([disabled]){transform:translateY(1px)}
-[data-theme="dark"] .input-group input{background:#2A2A2A;border-color:#3A3A3A}
-[data-theme="dark"] .current-limits{color:#B0B0B0}
+[data-theme="dark"] .input-group input{background:
+[data-theme="dark"] .current-limits{color:
 </style>
 <script>
 document.getElementById('limits-form')?.addEventListener('submit',async function(e){

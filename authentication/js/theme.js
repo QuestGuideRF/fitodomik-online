@@ -21,4 +21,4 @@ document.addEventListener('DOMContentLoaded', function() {
             themeIcon.innerHTML = theme === 'light' ? '🌙' : '☀️';
         }
     }
-}); 
+});

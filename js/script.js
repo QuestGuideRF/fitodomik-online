@@ -88,4 +88,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     eventTypeSelect.addEventListener('change', filterEvents);
     eventDateInput.addEventListener('change', filterEvents);
-}); 
+});

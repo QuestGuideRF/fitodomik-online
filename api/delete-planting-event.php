@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 try {
     $checkTableStmt = $pdo->query("SHOW CREATE TABLE event_log");
     $tableStructure = $checkTableStmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($tableStructure['Create Table']) && 
+    if (isset($tableStructure['Create Table']) &&
         (strpos($tableStructure['Create Table'], 'AUTO_INCREMENT') === false ||
          strpos($tableStructure['Create Table'], 'PRIMARY KEY') === false)) {
         $checkZeroIds = $pdo->query("SELECT COUNT(*) FROM event_log WHERE id = 0");
@@ -15,8 +15,8 @@ try {
             $tempStartId = $tempIdQuery->fetchColumn();
             $tempStartId = $tempStartId ? $tempStartId - 1 : -1;
             $updateZeroIds = $pdo->prepare("
-                UPDATE event_log 
-                SET id = (SELECT @row_id := @row_id - 1) 
+                UPDATE event_log
+                SET id = (SELECT @row_id := @row_id - 1)
                 WHERE id = 0
             ");
             $pdo->query("SET @row_id = " . $tempStartId);
@@ -30,10 +30,10 @@ try {
 function safeLogEvent($pdo, $user_id, $event_type, $description) {
     try {
         $checkStmt = $pdo->prepare("
-            SELECT COUNT(*) 
-            FROM event_log 
-            WHERE user_id = ? 
-            AND event_type = ? 
+            SELECT COUNT(*)
+            FROM event_log
+            WHERE user_id = ?
+            AND event_type = ?
             AND event_description = ?
             AND created_at > NOW() - INTERVAL 10 MINUTE
         ");
@@ -41,8 +41,8 @@ function safeLogEvent($pdo, $user_id, $event_type, $description) {
         $exists = $checkStmt->fetchColumn() > 0;
         if (!$exists) {
             $stmt = $pdo->prepare("
-                INSERT INTO event_log 
-                (user_id, event_type, event_description, created_at) 
+                INSERT INTO event_log
+                (user_id, event_type, event_description, created_at)
                 VALUES (?, ?, ?, NOW())
             ");
             $stmt->execute([$user_id, $event_type, $description]);
@@ -112,4 +112,4 @@ try {
     error_log('Общая ошибка при удалении события: ' . $e->getMessage());
     sendJsonResponse(false, 'Произошла ошибка при удалении события: ' . $e->getMessage());
 }
-?> 
+?>

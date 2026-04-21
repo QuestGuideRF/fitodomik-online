@@ -136,8 +136,8 @@ $filteredEvents = array_filter($events, function($event) {
                     </div>
                 <?php else: ?>
                     <?php foreach ($filteredEvents as $index => $event): ?>
-                        <div class="event-item <?php echo $event['event_type']; ?>" 
-                             style="background-color: <?php 
+                        <div class="event-item <?php echo $event['event_type']; ?>"
+                             style="background-color: <?php
                             switch($event['event_type']) {
                                 case 'temperature':
                                 case 'humidity':
@@ -163,16 +163,15 @@ $filteredEvents = array_filter($events, function($event) {
                 <?php endif; ?>
             </div>
             <div class="event-actions" style="margin-top: 20px; text-align: right;">
-                <button class="clear-button" onclick="clearEventLog()" <?php echo $isGuest ? 'disabled title="Недоступно в гостевом режиме"' : ''; ?> 
+                <button class="clear-button" onclick="clearEventLog()" <?php echo $isGuest ? 'disabled title="Недоступно в гостевом режиме"' : ''; ?>
                         style="background-color: rgba(220, 53, 69, 0.85); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; <?php echo $isGuest ? 'opacity: 0.5; cursor: not-allowed;' : ''; ?>"
-                        aria-label="Очистить журнал событий" 
+                        aria-label="Очистить журнал событий"
                         title="Удалить все записи из журнала событий">Очистить журнал</button>
             </div>
             <meta itemprop="dateModified" content="<?php echo date('c'); ?>">
         </div>
     </div>
 </div>
-<!-- Модальное окно для шаринга -->
 <div id="shareModal" class="modal" role="dialog" aria-labelledby="shareModalTitle" aria-modal="true">
     <div class="modal-content">
         <span class="close" aria-label="Закрыть окно" title="Закрыть">&times;</span>
@@ -216,29 +215,28 @@ $filteredEvents = array_filter($events, function($event) {
     }
     .guest-notice {
         background-color: rgba(255, 193, 7, 0.2);
-        border-left: 4px solid #ffc107;
+        border-left: 4px solid
         padding: 10px 15px;
         margin-bottom: 20px;
         border-radius: 4px;
     }
     .guest-notice p {
         margin: 0;
-        color: var(--text-color, #555);
+        color: var(--text-color,
     }
     .guest-notice a {
-        color: #007bff;
+        color:
         text-decoration: none;
         font-weight: bold;
     }
     .guest-notice a:hover {
         text-decoration: underline;
     }
-    /* Стили для уведомления о копировании */
     .copy-notification {
         position: fixed;
         top: 20px;
         right: 20px;
-        background-color: #4CAF50;
+        background-color:
         color: white;
         padding: 10px 20px;
         border-radius: 5px;
@@ -274,14 +272,14 @@ $filteredEvents = array_filter($events, function($event) {
             if (type !== 'all') {
                 switch(type) {
                     case 'alarm':
-                        return ['temperature', 'humidity', 'device'].includes(event.event_type) && 
+                        return ['temperature', 'humidity', 'device'].includes(event.event_type) &&
                                event.event_description.toLowerCase().includes('тревога');
                     case 'system':
-                        return ['device', 'lighting'].includes(event.event_type) && 
+                        return ['device', 'lighting'].includes(event.event_type) &&
                                !event.event_description.toLowerCase().includes('тревога');
                     case 'info':
-                        return event.event_type === 'device' && 
-                               (event.event_description.toLowerCase().includes('событие') || 
+                        return event.event_type === 'device' &&
+                               (event.event_description.toLowerCase().includes('событие') ||
                                 event.event_description.toLowerCase().includes('режим') ||
                                 event.event_description.toLowerCase().includes('информац'));
                     default:
@@ -311,7 +309,7 @@ $filteredEvents = array_filter($events, function($event) {
                 let backgroundColor;
                 if (event.event_description.toLowerCase().includes('тревога')) {
                     backgroundColor = 'rgba(220, 53, 69, 0.75)';
-                } else if (['device', 'lighting'].includes(event.event_type) && 
+                } else if (['device', 'lighting'].includes(event.event_type) &&
                           !event.event_description.toLowerCase().includes('событие') &&
                           !event.event_description.toLowerCase().includes('режим') &&
                           !event.event_description.toLowerCase().includes('информац')) {

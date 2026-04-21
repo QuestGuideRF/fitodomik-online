@@ -94,7 +94,7 @@ function getFromCache(storeName, key = null, indexDetails = null) {
         request.onsuccess = (event) => {
           const data = event.target.result;
           if (!data) {
-            return resolve(null); 
+            return resolve(null);
           }
           if (isDataFresh(data)) {
             resolve(data);
@@ -110,7 +110,7 @@ function getFromCache(storeName, key = null, indexDetails = null) {
         request.onsuccess = (event) => {
           const data = event.target.result;
           if (!data || data.length === 0) {
-            return resolve([]); 
+            return resolve([]);
           }
           const freshData = data.filter(item => isDataFresh(item));
           if (freshData.length < data.length) {
@@ -127,7 +127,7 @@ function getFromCache(storeName, key = null, indexDetails = null) {
         request.onsuccess = (event) => {
           const data = event.target.result;
           if (!data || data.length === 0) {
-            return resolve([]); 
+            return resolve([]);
           }
           const freshData = data.filter(item => isDataFresh(item));
           if (freshData.length < data.length) {
@@ -241,4 +241,4 @@ window.cacheManager = {
   clearStore,
   fetchDataWithCache,
   STORES
-}; 
+};

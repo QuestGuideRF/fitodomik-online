@@ -14,7 +14,7 @@ if (empty($presetModes) && $user_id) {
         ['name' => 'Салат (Рост)', 'temperature' => 20.0, 'tolerance' => 2.0, 'humidity' => 70, 'humidity_tolerance' => 5.0, 'light_hours' => 12.0, 'light_start' => '08:00', 'light_end' => '20:00'],
    ];
    $insertStmt = $pdo->prepare("
-        INSERT INTO preset_modes (user_id, name, temperature, tolerance, humidity, humidity_tolerance, light_hours, light_start, light_end) 
+        INSERT INTO preset_modes (user_id, name, temperature, tolerance, humidity, humidity_tolerance, light_hours, light_start, light_end)
         VALUES (:user_id, :name, :temperature, :tolerance, :humidity, :humidity_tolerance, :light_hours, :light_start, :light_end)
    ");
    foreach ($defaultModes as $mode) {
@@ -173,15 +173,15 @@ if (empty($presetModes) && $user_id) {
         <div id="shareCodeSection" class="d-none share-result-section">
             <label for="shareCodeDisplay" class="form-label">Код для импорта режима:</label>
             <div class="input-group">
-                <input type="text" 
-                       id="shareCodeDisplay" 
-                       class="form-control share-input" 
-                       readonly 
+                <input type="text"
+                       id="shareCodeDisplay"
+                       class="form-control share-input"
+                       readonly
                        aria-label="Код для импорта режима"
                        title="Код для импорта режима в другую систему"
                        placeholder="Код будет сгенерирован...">
-                <button class="btn btn-outline-secondary copy-btn" 
-                        type="button" 
+                <button class="btn btn-outline-secondary copy-btn"
+                        type="button"
                         id="copyCodeBtn"
                         aria-label="Копировать код в буфер обмена"
                         title="Копировать код в буфер обмена">
@@ -193,15 +193,15 @@ if (empty($presetModes) && $user_id) {
         <div id="shareLinkSection" class="d-none share-result-section">
             <label for="shareLinkDisplay" class="form-label">Ссылка для импорта режима:</label>
             <div class="input-group">
-                <input type="text" 
-                       id="shareLinkDisplay" 
-                       class="form-control share-input" 
+                <input type="text"
+                       id="shareLinkDisplay"
+                       class="form-control share-input"
                        readonly
                        aria-label="Ссылка для импорта режима"
                        title="Ссылка для импорта режима через браузер"
                        placeholder="Ссылка будет сгенерирована...">
-                <button class="btn btn-outline-secondary copy-btn" 
-                        type="button" 
+                <button class="btn btn-outline-secondary copy-btn"
+                        type="button"
                         id="copyLinkBtn"
                         aria-label="Копировать ссылку в буфер обмена"
                         title="Копировать ссылку в буфер обмена">
@@ -298,23 +298,23 @@ if (empty($presetModes) && $user_id) {
     box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
 .delete-button {
-    border-color: #dc3545;
-    color: #dc3545;
+    border-color:
+    color:
 }
 .delete-button:hover {
-    background: #dc3545;
+    background:
     color: white;
 }
 .modal {
     display: none;
-    position: fixed; 
-    z-index: 1000; 
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: hidden; 
-    background-color: rgba(0,0,0,0.6); 
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.6);
 }
 .modal-content {
     background-color: var(--card-bg);
@@ -363,12 +363,10 @@ if (empty($presetModes) && $user_id) {
     padding: 0 10px;
     max-height: calc(100vh - 220px);
 }
-#addPresetForm .form-group {
     width: 100%;
     max-width: 600px;
     margin: 0 auto 20px;
 }
-#addPresetForm fieldset {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 15px;
@@ -376,50 +374,39 @@ if (empty($presetModes) && $user_id) {
     background-color: var(--card-bg);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-#addPresetForm legend {
     font-weight: bold;
     padding: 0 10px;
     color: var(--primary-color);
     font-size: 16px;
 }
-#addPresetForm .input-row {
     display: flex;
     gap: 20px;
     margin-bottom: 15px;
     align-items: flex-start;
 }
-#addPresetForm .input-group {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-#addPresetForm .input-group label {
     margin-bottom: 8px;
     display: inline-block;
     font-weight: 500;
     min-height: 20px;
 }
-#addPresetForm label[for="presetTempTolerance"],
-#addPresetForm label[for="presetHumidityTolerance"],
-#addPresetForm label[for="presetLightEnd"] {
     position: relative;
     top: 0;
 }
-#addPresetForm .time-settings {
     display: flex;
     gap: 20px;
     justify-content: space-between;
 }
-#addPresetForm .time-settings .input-group {
     flex: 1;
 }
-#addPresetForm .hours-display {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin-top: 5px;
 }
-#presetLightHours.hours-value-display {
     width: 100%;
     height: 38px;
     display: flex;
@@ -435,14 +422,12 @@ if (empty($presetModes) && $user_id) {
     -webkit-user-select: none;
     user-select: none;
 }
-#addPresetForm .form-actions {
     display: flex;
     justify-content: center;
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px solid var(--border-color);
 }
-#addPresetForm .form-buttons-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -450,8 +435,6 @@ if (empty($presetModes) && $user_id) {
     width: 100%;
     max-width: 400px;
 }
-#addPresetForm .btn-save,
-#addPresetForm .btn-cancel {
     padding: 10px 20px;
     border-radius: 8px;
     font-weight: 600;
@@ -467,52 +450,40 @@ if (empty($presetModes) && $user_id) {
     color: white;
     border: none;
 }
-#addPresetForm .btn-save {
-    background-color: #4CAF50;
+    background-color:
     position: relative;
     top: -20px;
 }
-#addPresetForm .btn-cancel {
-    background-color: #dc3545;
+    background-color:
 }
-#addPresetForm .btn-save:hover {
-    background-color: #45a049;
+    background-color:
     transform: translateY(-2px);
     box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
-#addPresetForm .btn-cancel:hover {
-    background-color: #c82333;
+    background-color:
     transform: translateY(-2px);
     box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
-/* Выравнивание полей формы */
-#addPresetForm .input-group {
     position: relative;
 }
-#addPresetForm .input-group label {
     display: inline-block;
     position: relative;
     height: 20px;
     margin-bottom: 10px;
     line-height: 20px;
 }
-#addPresetForm fieldset legend {
     color: var(--primary-color);
     font-weight: 600;
     margin-bottom: 15px;
     text-align: center;
 }
 @media (max-width: 768px) {
-    #addPresetForm .form-actions {
         flex-direction: column;
         align-items: center;
     }
-    #addPresetForm .form-buttons-container {
         flex-direction: row;
         width: 100%;
     }
-    #addPresetForm .btn-save,
-    #addPresetForm .btn-cancel {
         flex: 1;
     }
 }
@@ -523,12 +494,12 @@ if (empty($presetModes) && $user_id) {
     margin-bottom: 15px;
 }
 .plant-selector-link-container {
-    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+    background: linear-gradient(135deg,
     border-radius: 12px;
     padding: 20px;
     margin: 20px 0;
     text-align: center;
-    border: 2px solid #4CAF50;
+    border: 2px solid
     box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
     transition: all 0.3s ease;
 }
@@ -538,7 +509,7 @@ if (empty($presetModes) && $user_id) {
 }
 .plant-selector-main-link {
     display: inline-block;
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    background: linear-gradient(135deg,
     color: white;
     text-decoration: none;
     padding: 15px 25px;
@@ -550,24 +521,24 @@ if (empty($presetModes) && $user_id) {
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 .plant-selector-main-link:hover {
-    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    background: linear-gradient(135deg,
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
     color: white;
     text-decoration: none;
 }
 .plant-selector-description {
-    color: #666;
+    color:
     font-size: 14px;
     margin: 0;
     font-style: italic;
 }
 [data-theme="dark"] .plant-selector-link-container {
-    background: linear-gradient(135deg, #2d4a2d 0%, #1a3a1a 100%);
-    border-color: #66bb6a;
+    background: linear-gradient(135deg,
+    border-color:
 }
 [data-theme="dark"] .plant-selector-description {
-    color: #ccc;
+    color:
 }
 .import-code-container {
     margin-bottom: 1rem;
@@ -601,8 +572,7 @@ if (empty($presetModes) && $user_id) {
     border: 1px solid var(--border-color);
     margin: 0 auto;
 }
-#importCodeBtn {
-    background-color: #28a745 !important;
+    background-color:
     color: white !important;
     border: none;
     border-radius: 10px;
@@ -612,8 +582,7 @@ if (empty($presetModes) && $user_id) {
     white-space: nowrap;
     min-width: 180px;
 }
-#importCodeBtn:hover {
-    background-color: #28a745 !important;
+    background-color:
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
 }
@@ -622,7 +591,6 @@ if (empty($presetModes) && $user_id) {
         flex-direction: column;
     }
     .import-code-container input,
-    #importCodeBtn {
         width: 100%;
         min-width: auto;
     }
@@ -703,15 +671,15 @@ if (empty($presetModes) && $user_id) {
     padding: 12px 15px;
     border-radius: 6px;
     cursor: pointer;
-    background: #007bff;
-    border: 1px solid #007bff;
+    background:
+    border: 1px solid
     color: white;
     font-weight: bold;
     margin: 0 auto;
     display: block;
 }
 .copy-btn:hover {
-    background: #0069d9;
+    background:
     transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -756,26 +724,24 @@ if (empty($presetModes) && $user_id) {
     white-space: nowrap;
 }
 .btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    color:
+    background-color:
+    border-color:
 }
 .btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+    color:
+    background-color:
+    border-color:
 }
 .btn-secondary {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
+    color:
+    background-color:
+    border-color:
 }
 .fw-bold {
     font-weight: bold;
 }
-#shareCodeSection button:hover,
-#shareLinkSection button:hover {
-    background: #0069d9;
+    background:
     transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
@@ -784,15 +750,12 @@ if (empty($presetModes) && $user_id) {
         font-size: 14px;
         padding: 8px;
     }
-    #shareModeName {
         word-break: break-word;
         display: inline-block;
     }
     .modal-content h2 {
         font-size: 20px;
     }
-    #shareCodeSection p,
-    #shareLinkSection p {
         font-size: 14px;
         margin-bottom: 8px;
     }
@@ -803,8 +766,6 @@ if (empty($presetModes) && $user_id) {
     margin-bottom: 8px;
     display: block;
 }
-#shareCodeDisplay,
-#shareLinkDisplay {
     font-family: monospace;
     width: 100%;
     white-space: nowrap;
@@ -834,7 +795,6 @@ if (empty($presetModes) && $user_id) {
         font-size: 14px;
         padding: 8px 5px;
     }
-    #shareModeName {
         word-break: break-word;
         display: inline-block;
     }
@@ -860,9 +820,9 @@ select.time-select {
     background-size: 12px;
 }
 [data-theme="dark"] select.time-select {
-    background-color: #333;
-    color: #fff;
-    border-color: #555;
+    background-color:
+    color:
+    border-color:
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8.825l4.15-4.15.85.85L6 10.525l-5-5 .85-.85z'/%3E%3C/svg%3E");
 }
 select.time-select:focus {
@@ -870,24 +830,21 @@ select.time-select:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.25);
 }
-/* Стили для выпадающего списка */
 select.time-select option {
     background-color: var(--card-bg);
     color: var(--text-color);
     padding: 10px;
 }
 [data-theme="dark"] select.time-select option {
-    background-color: #333;
-    color: #fff;
+    background-color:
+    color:
 }
-#addPresetForm .form-actions {
     display: flex;
     justify-content: center;
     margin-top: 20px;
     padding-top: 15px;
     border-top: 1px solid var(--border-color);
 }
-#addPresetForm .form-buttons-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -895,8 +852,6 @@ select.time-select option {
     width: 100%;
     max-width: 400px;
 }
-#addPresetForm .btn-save,
-#addPresetForm .btn-cancel {
     padding: 10px 20px;
     border-radius: 8px;
     font-weight: 600;
@@ -912,22 +867,17 @@ select.time-select option {
     color: white;
     border: none;
 }
-#addPresetForm .btn-save {
-    background-color: #4CAF50;
+    background-color:
     position: relative;
     top: -20px;
 }
 @media (max-width: 768px) {
-    #addPresetForm .form-actions {
         flex-direction: column;
         align-items: center;
     }
-    #addPresetForm .form-buttons-container {
         flex-direction: row;
         width: 100%;
     }
-    #addPresetForm .btn-save,
-    #addPresetForm .btn-cancel {
         flex: 1;
     }
 }
@@ -942,13 +892,13 @@ function timeToMinutes(timeStr) {
     const [hours, minutes] = timeStr.split(':').map(Number);
     return hours * 60 + minutes;
 }
-function isTimeInPeriod(time, start, end) { 
+function isTimeInPeriod(time, start, end) {
     const timeMin = timeToMinutes(time);
     const startMin = timeToMinutes(start);
     const endMin = timeToMinutes(end);
     if (startMin <= endMin) {
         return timeMin >= startMin && timeMin <= endMin;
-    } else { 
+    } else {
         return timeMin >= startMin || timeMin <= endMin;
     }
 }
@@ -957,9 +907,9 @@ function calculateTotalHours(startTime, endTime) {
     const end = timeToMinutes(endTime);
     let totalMinutes = end - start;
     if (totalMinutes < 0) {
-        totalMinutes += 24 * 60; 
+        totalMinutes += 24 * 60;
     }
-    return totalMinutes / 60; 
+    return totalMinutes / 60;
 }
 function togglePresetModes() {
     const content = document.getElementById('presetModesContent');
@@ -1005,7 +955,7 @@ async function activatePresetMode(modeData) {
             try {
                 if (typeof saveLightingSchedule === 'function') {
                     console.log('Автоматическое сохранение расписания освещения...');
-                    await saveLightingSchedule(true); 
+                    await saveLightingSchedule(true);
                     console.log('Расписание освещения успешно сохранено');
                 } else {
                     const saveLightingButton = document.querySelector('.lighting-settings .save-schedule');
@@ -1429,8 +1379,8 @@ function initShareModalButtons() {
                     const shareCodeSection = document.getElementById('shareCodeSection');
                     const shareLinkSection = document.getElementById('shareLinkSection');
                     const currentUrl = window.location.href;
-                    const urlParts = currentUrl.split('?')[0]; 
-                    const baseUrl = urlParts; 
+                    const urlParts = currentUrl.split('?')[0];
+                    const baseUrl = urlParts;
                     const shareLink = `${baseUrl}?code=${shareCode}`;
                     console.log('Сгенерирована ссылка:', shareLink);
                     setupInputField(shareLinkDisplay, shareLink);
@@ -1477,7 +1427,7 @@ function initShareModalButtons() {
 }
 async function deletePresetMode(modeId, modeName) {
     if (!confirm(`Вы уверены, что хотите удалить режим "${modeName}"?`)) {
-        return; 
+        return;
     }
     console.log("Попытка удалить режим ID:", modeId);
     try {
@@ -1585,4 +1535,4 @@ function setupImportByCode() {
         }
     });
 }
-</script> 
+</script>

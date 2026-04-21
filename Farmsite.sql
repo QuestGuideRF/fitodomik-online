@@ -1,32 +1,10 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1-1.el8
--- https://www.phpmyadmin.net/
---
--- Хост: localhost
--- Время создания: Окт 28 2025 г., 20:16
--- Версия сервера: 8.0.25-15
--- Версия PHP: 8.2.28
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `u3307679_Farmsite`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `alarm_thresholds`
---
-
+;
+;
+;
+;
 CREATE TABLE `alarm_thresholds` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
@@ -38,23 +16,11 @@ CREATE TABLE `alarm_thresholds` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `alarm_thresholds`
---
-
 INSERT INTO `alarm_thresholds` (`id`, `user_id`, `parameter_type`, `min_limit`, `max_limit`, `target_value`, `tolerance`, `created_at`, `updated_at`) VALUES
 (9, 1, 'temperature', 20.00, 30.00, 25.00, 5.00, '2025-04-24 18:09:40', '2025-05-25 10:07:35'),
 (13, 1, 'humidity_air', 65.00, 75.00, 70.00, 5.00, '2025-04-24 18:12:14', '2025-05-25 10:07:35'),
 (14, 1, 'humidity_soil', 10.00, 100.00, 55.00, 1.00, '2025-04-24 18:12:14', '2025-05-25 10:07:35'),
 (15, 1, 'co2', 200.00, 1500.00, 850.00, 1.00, '2025-04-24 18:12:14', '2025-05-25 10:07:35');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `device_states`
---
-
 CREATE TABLE `device_states` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -62,20 +28,8 @@ CREATE TABLE `device_states` (
   `curtains_state` tinyint(1) DEFAULT '0',
   `last_updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `device_states`
---
-
 INSERT INTO `device_states` (`id`, `user_id`, `lamp_state`, `curtains_state`, `last_updated`) VALUES
 (1, 1, 1, 0, '2025-05-25 10:07:35');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `event_log`
---
-
 CREATE TABLE `event_log` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
@@ -84,11 +38,6 @@ CREATE TABLE `event_log` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `event_log`
---
-
 INSERT INTO `event_log` (`id`, `user_id`, `event_type`, `event_description`, `created_at`, `description`) VALUES
 (1, 1, 'temperature', 'Тревога: температура 24.60°C вышла за установленные пределы (10°C - 15°C)', '2025-04-28 23:54:42', ''),
 (2, 1, 'soil_moisture', 'Тревога: влажность почвы 0.00% вышла за установленные пределы (10% - 100%)', '2025-04-28 23:54:42', ''),
@@ -284,13 +233,6 @@ INSERT INTO `event_log` (`id`, `user_id`, `event_type`, `event_description`, `cr
 (192, 1, 'humidity', 'Тревога: влажность воздуха 27.60% вышла за установленные пределы (65% - 75%)', '2025-05-02 20:58:58', ''),
 (193, 1, 'soil_moisture', 'Тревога: влажность почвы 0.00% вышла за установленные пределы (10% - 100%)', '2025-05-02 20:58:58', ''),
 (194, 1, 'humidity', 'Тревога: влажность воздуха 27.30% вышла за установленные пределы (65% - 75%)', '2025-05-02 21:06:38', '');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `farm_status`
---
-
 CREATE TABLE `farm_status` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -304,33 +246,14 @@ CREATE TABLE `farm_status` (
   `comment` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `farm_status`
---
-
 INSERT INTO `farm_status` (`id`, `user_id`, `temperature`, `humidity`, `light_level`, `curtains_level`, `co2_level`, `photo`, `photo_analysis`, `comment`, `created_at`) VALUES
 (43, 1, 25, 36, 2, 12.00, 800, 'farm_1_1746384329.jpg', 'analysis_1_1746384329.jpg', 'АНАЛИЗ СОСТОЯНИЯ РАСТЕНИЯ\nДата анализа: 2025-05-04 21:45:29\n\nСОСТОЯНИЕ: требует внимания\n\nРАСПРЕДЕЛЕНИЕ ЦВЕТОВ:\nздоровый зеленый: 53.5%; желтый: 32.0%; коричневый: 20.6%; светло-зеленый: 20.1%\n\nДЕТАЛИ АНАЛИЗА:\nОбнаружено значительное пожелтение листьев; Обнаружены коричневые участки на листьях; Хлороз: Пожелтение листьев; Грибковое заболевание: Коричневые пятна на листьях; Тля: Мелкие насекомые на листьях и стеблях\n\nРЕКОМЕНДАЦИИ:\nПроверьте режим полива; Проверьте уровень освещенности; Проверьте на наличие заболеваний; Удалите поврежденные листья; Добавить железосодержащие удобрения; Уменьшить полив; Внести азотные удобрения; Обработать фунгицидами; Улучшить вентиляцию; Удалить пораженные листья; Обработать инсектицидами; Использовать мыльный раствор; Привлечь естественных хищников\n', '2025-05-04 18:45:29');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `favorite_modes`
---
-
 CREATE TABLE `favorite_modes` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
   `preset_mode_id` int NOT NULL,
   `added_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `lighting_schedule`
---
-
 CREATE TABLE `lighting_schedule` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -340,22 +263,10 @@ CREATE TABLE `lighting_schedule` (
   `is_exception` tinyint(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `lighting_schedule`
---
-
 INSERT INTO `lighting_schedule` (`id`, `user_id`, `required_hours`, `start_time`, `end_time`, `is_exception`, `created_at`) VALUES
 (1, 1, 10.00, '07:00:00', '17:00:00', 0, '2025-04-29 14:46:27'),
 (30, 1, NULL, '08:00:00', '10:00:00', 1, '2025-05-01 16:03:31'),
 (31, 1, NULL, '12:00:00', '16:00:00', 1, '2025-05-01 16:03:31');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `messages`
---
-
 CREATE TABLE `messages` (
   `id` int NOT NULL,
   `text` text NOT NULL,
@@ -363,13 +274,6 @@ CREATE TABLE `messages` (
   `analysis_image_path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `planting_events`
---
-
 CREATE TABLE `planting_events` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -380,13 +284,6 @@ CREATE TABLE `planting_events` (
   `notes` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `planting_reminders`
---
-
 CREATE TABLE `planting_reminders` (
   `id` int NOT NULL,
   `event_id` int NOT NULL,
@@ -394,13 +291,6 @@ CREATE TABLE `planting_reminders` (
   `reminder_time` time DEFAULT NULL,
   `is_shown` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `preset_modes`
---
-
 CREATE TABLE `preset_modes` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -417,22 +307,12 @@ CREATE TABLE `preset_modes` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `preset_modes`
---
-
 INSERT INTO `preset_modes` (`id`, `user_id`, `name`, `temperature`, `tolerance`, `humidity`, `humidity_tolerance`, `light_hours`, `light_start`, `light_end`, `is_shared`, `share_code`, `created_at`, `updated_at`) VALUES
 (25, 1, 'Томат (Вегетация)', 24.0, 2.0, 65, 5.0, 16.0, '06:00:00', '22:00:00', 0, 'X356NSHZ', '2025-04-11 07:42:11', '2025-05-25 10:07:35'),
 (27, 1, 'Салат (Рост)', 20.0, 2.0, 70, 5.0, 12.0, '08:00:00', '20:00:00', 0, NULL, '2025-04-11 07:42:11', '2025-05-25 10:07:35');
-
---
--- Триггеры `preset_modes`
---
 DELIMITER $$
 CREATE TRIGGER `generate_share_code` BEFORE UPDATE ON `preset_modes` FOR EACH ROW BEGIN
   IF NEW.is_shared = 1 AND (OLD.is_shared = 0 OR OLD.is_shared IS NULL OR OLD.share_code IS NULL) THEN
-    -- Генерируем случайный код из букв и цифр
     SET @chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     SET @code = '';
     SET @i = 0;
@@ -445,13 +325,6 @@ CREATE TRIGGER `generate_share_code` BEFORE UPDATE ON `preset_modes` FOR EACH RO
 END
 $$
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `schedule`
---
-
 CREATE TABLE `schedule` (
   `id` int UNSIGNED NOT NULL,
   `user_id` int NOT NULL,
@@ -460,11 +333,6 @@ CREATE TABLE `schedule` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `time` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `schedule`
---
-
 INSERT INTO `schedule` (`id`, `user_id`, `curtains_schedule`, `lighting_schedule`, `created_at`, `time`) VALUES
 (1, 1, 0, 0, '2025-05-01 21:21:00', '0:00-1:00'),
 (2, 1, 0, 0, '2025-05-01 21:21:00', '1:00-2:00'),
@@ -490,13 +358,6 @@ INSERT INTO `schedule` (`id`, `user_id`, `curtains_schedule`, `lighting_schedule
 (22, 1, 1, 0, '2025-05-01 21:21:00', '21:00-22:0'),
 (23, 1, 0, 0, '2025-05-01 21:21:00', '22:00-23:0'),
 (24, 1, 0, 0, '2025-05-01 21:21:00', '23:00-0:00');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `sensor_data`
---
-
 CREATE TABLE `sensor_data` (
   `id` bigint NOT NULL,
   `user_id` int NOT NULL,
@@ -510,11 +371,6 @@ CREATE TABLE `sensor_data` (
   `curtains_state` tinyint(1) DEFAULT '0' COMMENT 'состояние занавесок (1 — открыты, 0 — закрыты)',
   `lamp_state` tinyint(1) DEFAULT '0' COMMENT 'состояние лампы (1 — включено, 0 — выключено)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `sensor_data`
---
-
 INSERT INTO `sensor_data` (`id`, `user_id`, `temperature`, `humidity`, `co2`, `soil_moisture`, `light_level`, `pressure`, `created_at`, `curtains_state`, `lamp_state`) VALUES
 (627, 1, 28.10, 18.70, 400, 0.00, 100.00, 1013.25, '2025-04-26 15:13:33', 0, 1),
 (628, 1, 29.10, 26.90, 400, 100.00, 6.67, 1013.25, '2025-04-27 06:25:03', 0, 1),
@@ -1004,13 +860,6 @@ INSERT INTO `sensor_data` (`id`, `user_id`, `temperature`, `humidity`, `co2`, `s
 (1113, 1, 27.40, 33.10, 400, 0.00, 605.00, 1013.25, '2025-05-04 18:24:08', 0, 1),
 (1114, 1, 27.70, 32.20, 400, 0.00, 562.50, 1013.25, '2025-05-04 18:25:22', 0, 1),
 (1115, 1, 27.10, 33.50, 400, 0.00, 1013.33, 1013.25, '2025-05-04 18:35:34', 0, 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `telegram_verifications`
---
-
 CREATE TABLE `telegram_verifications` (
   `id` int NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -1019,13 +868,6 @@ CREATE TABLE `telegram_verifications` (
   `is_verified` tinyint(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `users`
---
-
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -1039,147 +881,61 @@ CREATE TABLE `users` (
   `is_verified` tinyint(1) DEFAULT '0',
   `api_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `users`
---
-
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `avatar`, `telegram_username`, `telegram_chat_id`, `is_verified`, `api_token`) VALUES
 (1, 'Slavik10', '$2y$10$cYHdjTG.5r3wp88rsjZat.jQkpPBQKVOkWD07b2iKzNolsOSS2SRa', 'Слава', 'Домнин', '2025-04-08 13:34:57', 'avatar_1_1761650482.png', 'LEGENDA_SD', '1644233050', 1, '4349597e8eccf4642332991cd0584fc2'),
 (2, '123', '$2y$10$H1GQVqvTn5bacy.XFS.aAuPKsdyrKeV1WJjGs8my4LpVoVvHfkaza', '123', '123', '2025-04-25 05:53:21', NULL, 'LEGENDA_SD', '1644233050', 1, 'e15a9420ad8fea24f7415997e24a22867fec5a90e9b8e706c6182848d671d54d');
-
---
--- Триггеры `users`
---
 DELIMITER $$
 CREATE TRIGGER `after_user_register` AFTER INSERT ON `users` FOR EACH ROW BEGIN
     CALL create_user_schedule(NEW.id);
 END
 $$
 DELIMITER ;
-
---
--- Индексы сохранённых таблиц
---
-
---
--- Индексы таблицы `alarm_thresholds`
---
 ALTER TABLE `alarm_thresholds`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_parameter_unique` (`user_id`,`parameter_type`);
-
---
--- Индексы таблицы `device_states`
---
 ALTER TABLE `device_states`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Индексы таблицы `event_log`
---
 ALTER TABLE `event_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `event_type` (`event_type`);
-
---
--- Индексы таблицы `farm_status`
---
 ALTER TABLE `farm_status`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_id` (`user_id`);
-
---
--- Индексы таблицы `favorite_modes`
---
 ALTER TABLE `favorite_modes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `user_preset_unique` (`user_id`,`preset_mode_id`),
   ADD KEY `preset_mode_id` (`preset_mode_id`);
-
---
--- Индексы таблицы `lighting_schedule`
---
 ALTER TABLE `lighting_schedule`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Индексы таблицы `messages`
---
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `planting_events`
---
 ALTER TABLE `planting_events`
   ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `planting_reminders`
---
 ALTER TABLE `planting_reminders`
   ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `preset_modes`
---
 ALTER TABLE `preset_modes`
   ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `schedule`
---
 ALTER TABLE `schedule`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`,`time`);
-
---
--- Индексы таблицы `sensor_data`
---
 ALTER TABLE `sensor_data`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idx_user_created` (`user_id`,`created_at`);
-
---
--- Индексы таблицы `telegram_verifications`
---
 ALTER TABLE `telegram_verifications`
   ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `users`
---
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username_idx` (`username`);
-
---
--- AUTO_INCREMENT для сохранённых таблиц
---
-
---
--- AUTO_INCREMENT для таблицы `alarm_thresholds`
---
 ALTER TABLE `alarm_thresholds`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
-
---
--- AUTO_INCREMENT для таблицы `event_log`
---
 ALTER TABLE `event_log`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
-
---
--- AUTO_INCREMENT для таблицы `lighting_schedule`
---
 ALTER TABLE `lighting_schedule`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+;
+;
+;

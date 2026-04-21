@@ -22,10 +22,10 @@ try {
         exit;
     }
     $stmt = $pdo->prepare("
-        SELECT temperature, humidity, co2, soil_moisture, light_level, pressure, curtains_state, lamp_state 
-        FROM sensor_data 
-        WHERE user_id = ? 
-        ORDER BY created_at DESC 
+        SELECT temperature, humidity, co2, soil_moisture, light_level, pressure, curtains_state, lamp_state
+        FROM sensor_data
+        WHERE user_id = ?
+        ORDER BY created_at DESC
         LIMIT 1
     ");
     $stmt->execute([$user_id]);
@@ -57,4 +57,4 @@ try {
         'success' => false,
         'message' => 'Ошибка при получении данных о ферме'
     ]);
-} 
+}

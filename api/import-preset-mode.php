@@ -1,6 +1,6 @@
 <?php
 require_once "../config/database.php";
-require_once '../config/headers.php'; 
+require_once '../config/headers.php';
 session_start();
 header("Content-Type: application/json");
 if (!isset($_SESSION['user_id'])) {
@@ -32,12 +32,12 @@ try {
         exit;
     }
     $insertStmt = $pdo->prepare("INSERT INTO preset_modes (
-            user_id, name, temperature, tolerance, 
-            humidity, humidity_tolerance, light_hours, 
+            user_id, name, temperature, tolerance,
+            humidity, humidity_tolerance, light_hours,
             light_start, light_end, created_at
         ) VALUES (
-            :user_id, :name, :temperature, :tolerance, 
-            :humidity, :humidity_tolerance, :light_hours, 
+            :user_id, :name, :temperature, :tolerance,
+            :humidity, :humidity_tolerance, :light_hours,
             :light_start, :light_end, NOW()
         )");
     $newName = $mode['name'] . ' (импорт)';
@@ -54,7 +54,7 @@ try {
     ]);
     $newPresetId = $pdo->lastInsertId();
     echo json_encode([
-        'success' => true, 
+        'success' => true,
         'message' => 'Режим успешно импортирован',
         'presetId' => $newPresetId
     ]);
@@ -65,4 +65,4 @@ try {
     error_log('Общая ошибка: ' . $e->getMessage());
     echo json_encode(['success' => false, 'message' => 'Произошла ошибка при импорте режима']);
 }
-?> 
+?>

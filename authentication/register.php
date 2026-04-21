@@ -170,8 +170,8 @@ function transliterate($string) {
                 </div>
                 <div class="form-group">
                     <label for="username">Никнейм</label>
-                    <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>" 
-                           pattern="[a-zA-Z0-9_]{3,20}" 
+                    <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
+                           pattern="[a-zA-Z0-9_]{3,20}"
                            title="Только латинские буквы, цифры и знак подчеркивания, длина от 3 до 20 символов"
                            required>
                 </div>

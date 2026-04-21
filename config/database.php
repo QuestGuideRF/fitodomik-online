@@ -1,10 +1,8 @@
 <?php
-// Загружаем конфигурацию
 if (!isset($GLOBALS['env_config'])) {
     $GLOBALS['env_config'] = require __DIR__ . '/env.php';
 }
 $envConfig = $GLOBALS['env_config'];
-
 $host = $envConfig['DB_HOST'];
 $dbname = $envConfig['DB_NAME'];
 $username = $envConfig['DB_USERNAME'];
@@ -16,4 +14,4 @@ try {
 } catch(PDOException $e) {
     error_log("Database connection error: " . $e->getMessage());
     die("Ошибка подключения к базе данных. Пожалуйста, попробуйте позже.");
-} 
+}

@@ -88,22 +88,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
         }
         .telegram-change-content {
-            background: #1E1E1E;
+            background:
             padding: 2rem;
             border-radius: 12px;
             width: 90%;
             max-width: 500px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            border: 1px solid #2F2F2F;
+            border: 1px solid
         }
         .telegram-change-content h3 {
             margin: 0 0 1.5rem 0;
             font-size: 1.5rem;
-            color: #fff;
+            color:
             text-align: center;
         }
         .telegram-change-steps {
-            background: #2A2A2A;
+            background:
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
@@ -113,16 +113,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: flex-start;
             gap: 1rem;
             padding: 1rem;
-            background: #1E1E1E;
+            background:
             border-radius: 8px;
             margin-bottom: 1rem;
-            border: 1px solid #2F2F2F;
+            border: 1px solid
         }
         .telegram-step:last-child {
             margin-bottom: 0;
         }
         .step-number {
-            background: #4CAF50;
+            background:
             color: white;
             width: 28px;
             height: 28px;
@@ -140,25 +140,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .step-title {
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #fff;
+            color:
             font-size: 1.1rem;
         }
         .step-description {
-            color: #B0B0B0;
+            color:
             font-size: 0.95rem;
             line-height: 1.4;
         }
         .step-description code {
-            background: #2A2A2A;
+            background:
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: monospace;
             font-size: 0.9rem;
-            color: #4CAF50;
-            border: 1px solid #3A3A3A;
+            color:
+            border: 1px solid
         }
         .step-description strong {
-            color: #4CAF50;
+            color:
             font-weight: 600;
         }
         .telegram-actions {
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            background: #4CAF50;
+            background:
             color: white;
             border: none;
             border-radius: 8px;
@@ -182,14 +182,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: background-color 0.2s;
         }
         .telegram-actions .auth-button:hover {
-            background: #45a049;
+            background:
         }
         .telegram-actions .auth-button.secondary {
-            background: #2A2A2A;
-            border: 1px solid #3A3A3A;
+            background:
+            border: 1px solid
         }
         .telegram-actions .auth-button.secondary:hover {
-            background: #333333;
+            background:
         }
         .telegram-actions .auth-button svg {
             width: 20px;
@@ -203,12 +203,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .telegram-username {
             font-weight: 500;
-            color: #fff;
-            background: #2A2A2A;
+            color:
+            background:
             padding: 0.5rem 1rem;
             border-radius: 6px;
             font-size: 1rem;
-            border: 1px solid #3A3A3A;
+            border: 1px solid
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -359,4 +359,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
-</html> 
+</html>

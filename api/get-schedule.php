@@ -32,9 +32,9 @@ try {
     $user_id = $user['id'];
     log_message("Запрос расписания для пользователя ID: " . $user_id);
     $stmt = $pdo->prepare("
-        SELECT COUNT(*) 
-        FROM information_schema.TABLES 
-        WHERE TABLE_SCHEMA = DATABASE() 
+        SELECT COUNT(*)
+        FROM information_schema.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
         AND TABLE_NAME = 'schedule'
     ");
     $stmt->execute();
@@ -49,12 +49,12 @@ try {
         exit;
     }
     $stmt = $pdo->prepare("
-        SELECT time, curtains_schedule, lighting_schedule 
-        FROM schedule 
-        WHERE user_id = ? 
-        ORDER BY CASE 
-            WHEN time LIKE '0:%' THEN 0 
-            WHEN time LIKE '1:%' THEN 1 
+        SELECT time, curtains_schedule, lighting_schedule
+        FROM schedule
+        WHERE user_id = ?
+        ORDER BY CASE
+            WHEN time LIKE '0:%' THEN 0
+            WHEN time LIKE '1:%' THEN 1
             WHEN time LIKE '2:%' THEN 2
             WHEN time LIKE '3:%' THEN 3
             WHEN time LIKE '4:%' THEN 4
@@ -128,4 +128,4 @@ try {
         'message' => 'Ошибка сервера: ' . $e->getMessage()
     ]);
 }
-?> 
+?>

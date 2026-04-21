@@ -10,7 +10,7 @@ http_response_code(403);
     <meta http-equiv="refresh" content="10;url=index.php">
     <style>
         body {
-            background-color: #ff0000;
+            background-color:
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -43,7 +43,7 @@ http_response_code(403);
         }
         .btn {
             display: inline-block;
-            background-color: #000;
+            background-color:
             color: white;
             padding: 12px 25px;
             text-decoration: none;
@@ -53,7 +53,7 @@ http_response_code(403);
             transition: background-color 0.3s;
         }
         .btn:hover {
-            background-color: #333;
+            background-color:
         }
         @media (max-width: 480px) {
             h1 {
@@ -72,16 +72,12 @@ http_response_code(403);
         <div class="countdown">Перенаправление через <span id="timer">10</span> секунд</div>
         <a href="index.php" class="btn">Вернуться на главную страницу</a>
     </div>
-
     <script>
-        // Скрипт обратного отсчета
         let timeLeft = 10;
         const timerElement = document.getElementById('timer');
-        
         const countdown = setInterval(function() {
             timeLeft--;
             timerElement.textContent = timeLeft;
-            
             if (timeLeft <= 0) {
                 clearInterval(countdown);
             }

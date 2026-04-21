@@ -558,7 +558,7 @@ function filterAndRenderPlants() {
         filteredPlants = filteredPlants.filter(plant => plant.category === currentFilter);
     }
     if (searchQuery) {
-        filteredPlants = filteredPlants.filter(plant => 
+        filteredPlants = filteredPlants.filter(plant =>
             plant.name.toLowerCase().includes(searchQuery) ||
             plant.latin.toLowerCase().includes(searchQuery) ||
             plant.facts.some(fact => fact.toLowerCase().includes(searchQuery))

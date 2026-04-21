@@ -31,7 +31,7 @@ try {
         throw new Exception('Пользователь не авторизован. Необходимо указать действительный API токен или войти в систему.');
     }
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-        throw new Exception('Ошибка загрузки файла: ' . 
+        throw new Exception('Ошибка загрузки файла: ' .
             (isset($_FILES['image']) ? $_FILES['image']['error'] : 'Файл не загружен'));
     }
     $text = isset($_POST['text']) ? $_POST['text'] : 'Фото с камеры';
@@ -74,19 +74,19 @@ try {
         }
     }
     $stmt = $pdo->prepare("SELECT light_level, comment
-        FROM farm_status 
-        WHERE user_id = ? 
-        ORDER BY created_at DESC 
+        FROM farm_status
+        WHERE user_id = ?
+        ORDER BY created_at DESC
         LIMIT 1");
     $stmt->execute([$user_id]);
     $lastStatus = $stmt->fetch(PDO::FETCH_ASSOC);
     $light_level = $lastStatus ? $lastStatus['light_level'] : null;
     $stmt = $pdo->prepare("INSERT INTO farm_status (
-            user_id, 
+            user_id,
             light_level,
-            photo, 
-            photo_analysis, 
-            comment, 
+            photo,
+            photo_analysis,
+            comment,
             created_at
         ) VALUES (
             ?, ?, ?, ?, ?, NOW()
@@ -121,4 +121,4 @@ try {
         'message' => $e->getMessage()
     ]);
 }
-?> 
+?>

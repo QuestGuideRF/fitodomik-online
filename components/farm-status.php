@@ -64,11 +64,11 @@ $updateTime = date('H:i', $lastUpdate);
                 <div class="farm-info-column">
                     <div class="farm-status-text" itemprop="description">
                         <h3>Общее состояние системы</h3>
-                        <p><?php 
+                        <p><?php
                             if ($isGuest) {
                                 echo 'Для просмотра состояния вашей фермы, пожалуйста, авторизуйтесь.';
                             } else {
-                                echo nl2br(htmlspecialchars($status['comment'] ?? 'Информация о состоянии системы отсутствует.')); 
+                                echo nl2br(htmlspecialchars($status['comment'] ?? 'Информация о состоянии системы отсутствует.'));
                             }
                         ?></p>
                     </div>
@@ -80,7 +80,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">🌡️</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">Температура</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '-- °C';
                                     } else {
@@ -98,7 +98,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">💧</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">Влажность</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '--%';
                                     } else {
@@ -116,7 +116,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">🌱</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">Влажность почвы</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '--%';
                                     } else {
@@ -134,7 +134,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">🌍</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">CO₂</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '-- ppm';
                                     } else {
@@ -152,7 +152,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">🌬️</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">Давление</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '-- мм.рт.ст';
                                     } else {
@@ -170,7 +170,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">🚪</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">Шторы</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '--';
                                     } else {
@@ -187,7 +187,7 @@ $updateTime = date('H:i', $lastUpdate);
                             <div class="sensor-icon">💡</div>
                             <div class="sensor-info">
                                 <h4 itemprop="name">Освещение</h4>
-                                <p itemprop="value"><?php 
+                                <p itemprop="value"><?php
                                     if ($isGuest) {
                                         echo '--';
                                     } else {
@@ -233,21 +233,18 @@ $updateTime = date('H:i', $lastUpdate);
 .sensor-info h4{margin:0 0 4px 0;font-size:13px;color:var(--text-color);opacity:0.8}
 .sensor-info p{margin:0;font-size:16px;font-weight:500;color:var(--text-color)}
 .guest-message{text-align:center;padding:40px;background-color:var(--background);border-radius:8px;color:var(--text-color)}
-/* Улучшения для мобильных устройств */
 @media (max-width:768px){
     .farm-content-grid{grid-template-columns:1fr}
     .sensor-item{padding:10px}
     .sensor-icon{width:28px;height:28px;font-size:18px}
     .farm-status-content.active{padding:15px}
     .farm-photo,.farm-photo-placeholder{max-height:200px}
-    /* Центрирование компонентов на карточках */
     .sensor-info h4 {
         text-align: center;
     }
     .sensor-info p {
         text-align: center;
     }
-    /* Улучшения для блоков температуры и влажности в других компонентах */
     .temperature-block .settings-row,
     .humidity-block .settings-row {
         display: flex;
@@ -255,7 +252,7 @@ $updateTime = date('H:i', $lastUpdate);
         align-items: center;
         text-align: center;
     }
-    .value-input, 
+    .value-input,
     .tolerance-input {
         width: 100%;
         margin-bottom: 10px;
@@ -268,7 +265,6 @@ $updateTime = date('H:i', $lastUpdate);
         margin-top: 10px;
         text-align: center;
     }
-    /* Лучшее использование пространства */
     .farm-sensors-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -288,7 +284,7 @@ $updateTime = date('H:i', $lastUpdate);
         width: 36px;
         height: 36px;
     }
-    .value-input label, 
+    .value-input label,
     .tolerance-input label {
         margin-bottom: 5px;
     }

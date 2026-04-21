@@ -72,25 +72,25 @@ try {
         }
         $sql = "INSERT INTO sensor_data (
             id,
-            user_id, 
-            temperature, 
-            humidity, 
-            soil_moisture, 
-            light_level, 
-            co2, 
-            pressure, 
+            user_id,
+            temperature,
+            humidity,
+            soil_moisture,
+            light_level,
+            co2,
+            pressure,
             lamp_state,
             curtains_state,
             created_at
         ) VALUES (
             ?,
-            CAST(? AS UNSIGNED), 
-            CAST(? AS DECIMAL(5,2)), 
-            CAST(? AS DECIMAL(5,2)), 
-            CAST(? AS DECIMAL(5,2)), 
-            CAST(? AS DECIMAL(8,2)), 
-            CAST(? AS UNSIGNED), 
-            CAST(? AS DECIMAL(7,2)), 
+            CAST(? AS UNSIGNED),
+            CAST(? AS DECIMAL(5,2)),
+            CAST(? AS DECIMAL(5,2)),
+            CAST(? AS DECIMAL(5,2)),
+            CAST(? AS DECIMAL(8,2)),
+            CAST(? AS UNSIGNED),
+            CAST(? AS DECIMAL(7,2)),
             ?,
             ?,
             NOW()
@@ -114,24 +114,24 @@ try {
         $saved_id = $explicit_id;
     } else {
         $sql = "INSERT INTO sensor_data (
-            user_id, 
-            temperature, 
-            humidity, 
-            soil_moisture, 
-            light_level, 
-            co2, 
-            pressure, 
+            user_id,
+            temperature,
+            humidity,
+            soil_moisture,
+            light_level,
+            co2,
+            pressure,
             lamp_state,
             curtains_state,
             created_at
         ) VALUES (
-            CAST(? AS UNSIGNED), 
-            CAST(? AS DECIMAL(5,2)), 
-            CAST(? AS DECIMAL(5,2)), 
-            CAST(? AS DECIMAL(5,2)), 
-            CAST(? AS DECIMAL(8,2)), 
-            CAST(? AS UNSIGNED), 
-            CAST(? AS DECIMAL(7,2)), 
+            CAST(? AS UNSIGNED),
+            CAST(? AS DECIMAL(5,2)),
+            CAST(? AS DECIMAL(5,2)),
+            CAST(? AS DECIMAL(5,2)),
+            CAST(? AS DECIMAL(8,2)),
+            CAST(? AS UNSIGNED),
+            CAST(? AS DECIMAL(7,2)),
             ?,
             ?,
             NOW()
@@ -154,7 +154,7 @@ try {
         $saved_id = $pdo->lastInsertId();
     }
     $stmt = $pdo->prepare("
-        SELECT 
+        SELECT
             id,
             user_id,
             CAST(temperature AS DECIMAL(5,2)) as temperature,
@@ -166,7 +166,7 @@ try {
             lamp_state,
             curtains_state,
             created_at
-        FROM sensor_data 
+        FROM sensor_data
         WHERE id = ?
     ");
     $stmt->execute([$saved_id]);

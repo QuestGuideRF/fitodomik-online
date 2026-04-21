@@ -1,7 +1,7 @@
 <?php
 require_once 'config/database.php';
 require_once 'config/session.php';
-require_once 'security/headers.php'; 
+require_once 'security/headers.php';
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch();
@@ -93,7 +93,7 @@ $user = $stmt->fetch();
         </div>
     </header>
     <main class="container">
-        <?php 
+        <?php
         $components = [
             'components/farm-status.php',
             'components/farm-settings.php',
@@ -113,4 +113,4 @@ $user = $stmt->fetch();
     <footer>
     </footer>
 </body>
-</html> 
+</html>

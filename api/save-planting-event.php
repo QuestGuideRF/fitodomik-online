@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 try {
     $checkTableStmt = $pdo->query("SHOW CREATE TABLE event_log");
     $tableStructure = $checkTableStmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($tableStructure['Create Table']) && 
+    if (isset($tableStructure['Create Table']) &&
         (strpos($tableStructure['Create Table'], 'AUTO_INCREMENT') === false ||
          strpos($tableStructure['Create Table'], 'PRIMARY KEY') === false)) {
         $checkZeroIds = $pdo->query("SELECT COUNT(*) FROM event_log WHERE id = 0");
@@ -15,8 +15,8 @@ try {
             $tempStartId = $tempIdQuery->fetchColumn();
             $tempStartId = $tempStartId ? $tempStartId - 1 : -1;
             $updateZeroIds = $pdo->prepare("
-                UPDATE event_log 
-                SET id = (SELECT @row_id := @row_id - 1) 
+                UPDATE event_log
+                SET id = (SELECT @row_id := @row_id - 1)
                 WHERE id = 0
             ");
             $pdo->query("SET @row_id = " . $tempStartId);
@@ -26,7 +26,7 @@ try {
     }
     $checkPlantingTableStmt = $pdo->query("SHOW CREATE TABLE planting_events");
     $plantingTableStructure = $checkPlantingTableStmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($plantingTableStructure['Create Table']) && 
+    if (isset($plantingTableStructure['Create Table']) &&
         (strpos($plantingTableStructure['Create Table'], 'AUTO_INCREMENT') === false ||
          strpos($plantingTableStructure['Create Table'], 'PRIMARY KEY') === false)) {
         $checkZeroIds = $pdo->query("SELECT COUNT(*) FROM planting_events WHERE id = 0");
@@ -36,8 +36,8 @@ try {
             $tempStartId = $tempIdQuery->fetchColumn();
             $tempStartId = $tempStartId ? $tempStartId - 1 : -1;
             $updateZeroIds = $pdo->prepare("
-                UPDATE planting_events 
-                SET id = (SELECT @row_id := @row_id - 1) 
+                UPDATE planting_events
+                SET id = (SELECT @row_id := @row_id - 1)
                 WHERE id = 0
             ");
             $pdo->query("SET @row_id = " . $tempStartId);
@@ -47,7 +47,7 @@ try {
     }
     $checkRemindersTableStmt = $pdo->query("SHOW CREATE TABLE planting_reminders");
     $remindersTableStructure = $checkRemindersTableStmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($remindersTableStructure['Create Table']) && 
+    if (isset($remindersTableStructure['Create Table']) &&
         (strpos($remindersTableStructure['Create Table'], 'AUTO_INCREMENT') === false ||
          strpos($remindersTableStructure['Create Table'], 'PRIMARY KEY') === false)) {
         $checkZeroIds = $pdo->query("SELECT COUNT(*) FROM planting_reminders WHERE id = 0");
@@ -57,8 +57,8 @@ try {
             $tempStartId = $tempIdQuery->fetchColumn();
             $tempStartId = $tempStartId ? $tempStartId - 1 : -1;
             $updateZeroIds = $pdo->prepare("
-                UPDATE planting_reminders 
-                SET id = (SELECT @row_id := @row_id - 1) 
+                UPDATE planting_reminders
+                SET id = (SELECT @row_id := @row_id - 1)
                 WHERE id = 0
             ");
             $pdo->query("SET @row_id = " . $tempStartId);
@@ -72,10 +72,10 @@ try {
 function safeLogEvent($pdo, $user_id, $event_type, $description) {
     try {
         $checkStmt = $pdo->prepare("
-            SELECT COUNT(*) 
-            FROM event_log 
-            WHERE user_id = ? 
-            AND event_type = ? 
+            SELECT COUNT(*)
+            FROM event_log
+            WHERE user_id = ?
+            AND event_type = ?
             AND event_description = ?
             AND created_at > NOW() - INTERVAL 10 MINUTE
         ");
@@ -83,8 +83,8 @@ function safeLogEvent($pdo, $user_id, $event_type, $description) {
         $exists = $checkStmt->fetchColumn() > 0;
         if (!$exists) {
             $stmt = $pdo->prepare("
-                INSERT INTO event_log 
-                (user_id, event_type, event_description, created_at) 
+                INSERT INTO event_log
+                (user_id, event_type, event_description, created_at)
                 VALUES (?, ?, ?, NOW())
             ");
             $stmt->execute([$user_id, $event_type, $description]);
@@ -142,12 +142,12 @@ try {
         if ($check_stmt->rowCount() === 0) {
             throw new Exception("Событие для редактирования не найдено или не принадлежит вам.");
         }
-        $update_event_sql = "UPDATE planting_events SET 
-                                type = :type, 
-                                plant_name = :plant_name, 
-                                event_date = :event_date, 
-                                event_time = :event_time, 
-                                notes = :notes 
+        $update_event_sql = "UPDATE planting_events SET
+                                type = :type,
+                                plant_name = :plant_name,
+                                event_date = :event_date,
+                                event_time = :event_time,
+                                notes = :notes
                              WHERE id = :event_id";
         $stmt = $pdo->prepare($update_event_sql);
         $stmt->bindParam(':type', $event_type);
@@ -161,8 +161,8 @@ try {
         $delete_reminder_stmt->bindParam(':event_id', $event_id_to_update, PDO::PARAM_INT);
         $delete_reminder_stmt->execute();
         if ($event_type === 'reminder' && $reminder_date) {
-            $insert_reminder_stmt = $pdo->prepare("INSERT INTO planting_reminders 
-                (event_id, reminder_date, reminder_time) 
+            $insert_reminder_stmt = $pdo->prepare("INSERT INTO planting_reminders
+                (event_id, reminder_date, reminder_time)
                 VALUES (:event_id, :reminder_date, :reminder_time)");
             $insert_reminder_stmt->bindParam(':event_id', $event_id_to_update, PDO::PARAM_INT);
             $insert_reminder_stmt->bindParam(':reminder_date', $reminder_date);
@@ -214,8 +214,8 @@ try {
     }
     error_log('Ошибка при сохранении события: ' . $e->getMessage());
     sendJsonResponse(false, 'Произошла ошибка при сохранении события: ' . $e->getMessage());
-} catch (Exception $e) { 
+} catch (Exception $e) {
     error_log('Общая ошибка при сохранении события: ' . $e->getMessage());
     sendJsonResponse(false, 'Произошла ошибка: ' . $e->getMessage());
 }
-?> 
+?>

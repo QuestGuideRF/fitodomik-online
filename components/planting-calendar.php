@@ -120,18 +120,18 @@ $isGuest = !isset($_SESSION['user_id']);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 0;
-    background-color: #4CAF50 !important;
+    background-color:
     color: white !important;
     font-size: 18px;
     font-weight: 500;
 }
 .green-header {
-    background-color: #4CAF50 !important;
+    background-color:
     color: white !important;
 }
-[data-theme="dark"] .section-header, 
+[data-theme="dark"] .section-header,
 [data-theme="dark"] .green-header {
-    background-color: #66BB6A !important;
+    background-color:
 }
 .calendar-container {
     background-color: var(--card-bg);
@@ -251,21 +251,21 @@ $isGuest = !isset($_SESSION['user_id']);
     transition: all 0.2s ease;
 }
 .event-button {
-    background-color: #4CAF50;
+    background-color:
 }
 .event-button:hover {
-    background-color: #3e8e41;
+    background-color:
     transform: translateY(-2px);
 }
 .reminder-button {
-    background-color: #F44336;
+    background-color:
 }
 .reminder-button:hover {
-    background-color: #d32f2f;
+    background-color:
     transform: translateY(-2px);
 }
 .cancel-button {
-    background-color: #6c757d;
+    background-color:
     color: white;
     padding: 10px 15px;
     border: none;
@@ -321,13 +321,13 @@ $isGuest = !isset($_SESSION['user_id']);
     border: 1px solid var(--border-color);
 }
 .dark-theme .form-group select {
-    background-color: #2a2a2a;
-    color: #e0e0e0;
-    border-color: #444;
+    background-color:
+    color:
+    border-color:
 }
 .dark-theme .form-group select option {
-    background-color: #2a2a2a;
-    color: #e0e0e0;
+    background-color:
+    color:
 }
 .planting-form {
     background-color: var(--input-bg);
@@ -440,13 +440,13 @@ $isGuest = !isset($_SESSION['user_id']);
     border-radius: 4px;
     border: 1px dashed var(--border-color);
 }
-.event-type-planting { border-left: 5px solid #4CAF50; }
-.event-type-sprouting { border-left: 5px solid #2196F3; }
-.event-type-watering { border-left: 5px solid #00BCD4; }
-.event-type-fertilizing { border-left: 5px solid #FF9800; }
-.event-type-harvesting { border-left: 5px solid #9C27B0; }
-.event-type-reminder { border-left: 5px solid #F44336; }
-.event-type-other { border-left: 5px solid #607D8B; }
+.event-type-planting { border-left: 5px solid
+.event-type-sprouting { border-left: 5px solid
+.event-type-watering { border-left: 5px solid
+.event-type-fertilizing { border-left: 5px solid
+.event-type-harvesting { border-left: 5px solid
+.event-type-reminder { border-left: 5px solid
+.event-type-other { border-left: 5px solid
 .day-event-marker {
     width: 8px;
     height: 8px;
@@ -454,13 +454,13 @@ $isGuest = !isset($_SESSION['user_id']);
     display: inline-block;
     margin-right: 3px;
 }
-.marker-planting { background-color: #4CAF50; }
-.marker-sprouting { background-color: #2196F3; }
-.marker-watering { background-color: #00BCD4; }
-.marker-fertilizing { background-color: #FF9800; }
-.marker-harvesting { background-color: #9C27B0; }
-.marker-reminder { background-color: #F44336; }
-.marker-other { background-color: #607D8B; }
+.marker-planting { background-color:
+.marker-sprouting { background-color:
+.marker-watering { background-color:
+.marker-fertilizing { background-color:
+.marker-harvesting { background-color:
+.marker-reminder { background-color:
+.marker-other { background-color:
 .event-markers {
     position: absolute;
     bottom: 5px;
@@ -498,9 +498,9 @@ $isGuest = !isset($_SESSION['user_id']);
 .dark-theme .form-group input[type="date"],
 .dark-theme .form-group input[type="time"],
 .dark-theme .form-group textarea {
-    background-color: #2a2a2a;
-    color: #e0e0e0;
-    border-color: #444;
+    background-color:
+    color:
+    border-color:
 }
 .form-group select,
 .form-group option {
@@ -533,15 +533,15 @@ select option {
 }
 [data-theme="dark"] .form-group select,
 [data-theme="dark"] .form-group select option {
-    background-color: #2a2a2a !important;
-    color: #e0e0e0 !important;
-    border-color: #444 !important;
+    background-color:
+    color:
+    border-color:
 }
 [data-theme="dark"] .form-group input[type="date"],
 [data-theme="dark"] .form-group input[type="time"] {
-    background-color: #2a2a2a;
-    color: #e0e0e0;
-    border-color: #444;
+    background-color:
+    color:
+    border-color:
     color-scheme: dark;
 }
 [data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator {
@@ -552,17 +552,17 @@ select option {
 }
 .guest-notice {
     background-color: rgba(255, 193, 7, 0.2);
-    border-left: 4px solid #ffc107;
+    border-left: 4px solid
     padding: 10px 15px;
     margin-bottom: 20px;
     border-radius: 4px;
 }
 .guest-notice p {
     margin: 0;
-    color: var(--text-color, #555);
+    color: var(--text-color,
 }
 .guest-notice a {
-    color: #007bff;
+    color:
     text-decoration: none;
     font-weight: bold;
 }
@@ -604,9 +604,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const icon = document.querySelector('.planting-section .accordion-icon');
     if (content && icon) {
     }
-    let currentDate = new Date(); 
-    let selectedDate = new Date(); 
-    let eventsDB = []; 
+    let currentDate = new Date();
+    let selectedDate = new Date();
+    let eventsDB = [];
     const months = [
         'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
         'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
@@ -726,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ event_id: eventId })
         })
-        .then(response => response.json()) 
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert('Событие успешно удалено!');
@@ -948,12 +948,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(this);
             const now = new Date();
             if (!formData.get('event-date')) formData.set('event-date', formatDate(now));
-            if (!formData.get('event-time')) { 
+            if (!formData.get('event-time')) {
                 const currentEventTime = eventTimeInput.value;
                 if (!currentEventTime) {
                     formData.set('event-time', formatTime(now));
                 } else {
-                    formData.set('event-time', currentEventTime); 
+                    formData.set('event-time', currentEventTime);
                 }
             }
             if (formData.get('event-type') === 'reminder') {
@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!currentReminderTime) {
                     formData.set('reminder-time', formatTime(now));
                 } else {
-                    formData.set('reminder-time', currentReminderTime); 
+                    formData.set('reminder-time', currentReminderTime);
                 }
             }
             saveEvent(formData);
@@ -989,7 +989,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const event = eventsDB.find(e => e.id === eventId);
             if (event) {
                 formTitle.textContent = 'Редактировать событие';
-                addPlantingForm.reset(); 
+                addPlantingForm.reset();
                 let eventIdInput = addPlantingForm.querySelector('input[name="event_id"]');
                 if (!eventIdInput) {
                     eventIdInput = document.createElement('input');
@@ -1028,4 +1028,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     initCalendar();
 });
-</script> 
+</script>

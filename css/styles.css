@@ -1198,7 +1198,7 @@ body {
 }
 .farm-settings-content {
     background: var(--background-color);
-} 
+}
 .header-content {
     display: flex;
     justify-content: space-between;
@@ -1492,4 +1492,4 @@ body {
 }
 .remove-exception:hover {
     opacity: 0.9;
-} 
+}

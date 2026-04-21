@@ -28,7 +28,7 @@ if (strpos($file, 'avatars/') === 0) {
 if (!file_exists($file_path) || !is_file($file_path)) {
     error_log("Файл не найден: " . $file_path);
     header("HTTP/1.0 404 Not Found");
-    header("Cache-Control: public, max-age=86400"); 
+    header("Cache-Control: public, max-age=86400");
     exit("Файл не найден");
 }
 switch ($extension) {
@@ -52,10 +52,10 @@ switch ($extension) {
         header("Content-Type: image/svg+xml");
         break;
 }
-header("Cache-Control: public, max-age=31536000"); 
-header("Expires: " . gmdate("D, d M Y H:i:s", time() + 31536000) . " GMT"); 
+header("Cache-Control: public, max-age=31536000");
+header("Expires: " . gmdate("D, d M Y H:i:s", time() + 31536000) . " GMT");
 $filesize = filesize($file_path);
 if ($filesize !== false) {
     header("Content-Length: " . $filesize);
 }
-readfile($file_path); 
+readfile($file_path);

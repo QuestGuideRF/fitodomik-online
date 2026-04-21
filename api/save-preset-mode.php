@@ -5,16 +5,16 @@ header('Content-Type: application/json');
 try {
     $checkTableStmt = $pdo->query("SHOW CREATE TABLE event_log");
     $tableStructure = $checkTableStmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($tableStructure['Create Table']) && 
+    if (isset($tableStructure['Create Table']) &&
         (strpos($tableStructure['Create Table'], 'AUTO_INCREMENT') === false ||
          strpos($tableStructure['Create Table'], 'PRIMARY KEY') === false)) {
         $pdo->exec("ALTER TABLE event_log MODIFY id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY");
     }
     $checkPresetTableStmt = $pdo->query("SHOW CREATE TABLE preset_modes");
     $presetTableStructure = $checkPresetTableStmt->fetch(PDO::FETCH_ASSOC);
-    if (isset($presetTableStructure['Create Table']) && 
+    if (isset($presetTableStructure['Create Table']) &&
         (strpos($presetTableStructure['Create Table'], 'AUTO_INCREMENT') === false ||
-        strpos($presetTableStructure['Create Table'], '`id`') !== false && 
+        strpos($presetTableStructure['Create Table'], '`id`') !== false &&
         strpos($presetTableStructure['Create Table'], 'AUTO_INCREMENT') === false)) {
         $checkZeroIds = $pdo->query("SELECT COUNT(*) FROM preset_modes WHERE id = 0");
         $hasZeroIds = $checkZeroIds->fetchColumn() > 0;
@@ -23,8 +23,8 @@ try {
             $tempStartId = $tempIdQuery->fetchColumn();
             $tempStartId = $tempStartId ? $tempStartId - 1 : -1;
             $updateZeroIds = $pdo->prepare("
-                UPDATE preset_modes 
-                SET id = (SELECT @row_id := @row_id - 1) 
+                UPDATE preset_modes
+                SET id = (SELECT @row_id := @row_id - 1)
                 WHERE id = 0
             ");
             $pdo->query("SET @row_id = " . $tempStartId);
@@ -99,19 +99,19 @@ if (empty($data['light_end']) || !preg_match('/^\d{2}:\d{2}$/', $data['light_end
     exit;
 }
 $name = trim($data['name']);
-$light_start = $data['light_start']; 
-$light_end = $data['light_end'];     
+$light_start = $data['light_start'];
+$light_end = $data['light_end'];
 try {
-    $pdo->beginTransaction(); 
+    $pdo->beginTransaction();
     $stmt = $pdo->prepare("
         INSERT INTO preset_modes (
-            user_id, name, temperature, tolerance, 
-            humidity, humidity_tolerance, light_hours, 
+            user_id, name, temperature, tolerance,
+            humidity, humidity_tolerance, light_hours,
             light_start, light_end, created_at
-        ) 
+        )
         VALUES (
-            :user_id, :name, :temperature, :tolerance, 
-            :humidity, :humidity_tolerance, :light_hours, 
+            :user_id, :name, :temperature, :tolerance,
+            :humidity, :humidity_tolerance, :light_hours,
             :light_start, :light_end, NOW()
         )
     ");
@@ -130,10 +130,10 @@ try {
     function safeLogEvent($pdo, $user_id, $event_type, $description) {
         try {
             $checkStmt = $pdo->prepare("
-                SELECT COUNT(*) 
-                FROM event_log 
-                WHERE user_id = ? 
-                AND event_type = ? 
+                SELECT COUNT(*)
+                FROM event_log
+                WHERE user_id = ?
+                AND event_type = ?
                 AND event_description = ?
                 AND created_at > NOW() - INTERVAL 10 MINUTE
             ");
@@ -141,8 +141,8 @@ try {
             $exists = $checkStmt->fetchColumn() > 0;
             if (!$exists) {
                 $stmt = $pdo->prepare("
-                    INSERT INTO event_log 
-                    (user_id, event_type, event_description, created_at) 
+                    INSERT INTO event_log
+                    (user_id, event_type, event_description, created_at)
                     VALUES (?, ?, ?, NOW())
                 ");
                 $stmt->execute([$user_id, $event_type, $description]);
@@ -156,7 +156,7 @@ try {
     safeLogEvent($pdo, $user_id, 'system', 'Сохранен режим: ' . $data['name']);
     $pdo->commit();
     echo json_encode([
-        'success' => true, 
+        'success' => true,
         'message' => 'Режим успешно сохранен',
         'presetId' => $newPresetId
     ]);

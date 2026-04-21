@@ -73,24 +73,24 @@ error_reporting(E_ALL);
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2E7D32;
-            --primary-light: #4CAF50;
-            --primary-dark: #1B5E20;
-            --text-color: #333;
-            --bg-color: #f5f5f5;
+            --primary-color:
+            --primary-light:
+            --primary-dark:
+            --text-color:
+            --bg-color:
             --card-bg: white;
             --shadow-color: rgba(0,0,0,0.1);
-            --border-color: #e0e0e0;
+            --border-color:
         }
         [data-theme="dark"] {
-            --primary-color: #4CAF50;
-            --primary-light: #66BB6A;
-            --primary-dark: #2E7D32;
-            --text-color: #f5f5f5;
-            --bg-color: #1a1a1a;
-            --card-bg: #2d2d2d;
+            --primary-color:
+            --primary-light:
+            --primary-dark:
+            --text-color:
+            --bg-color:
+            --card-bg:
             --shadow-color: rgba(0,0,0,0.3);
-            --border-color: #404040;
+            --border-color:
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -210,8 +210,8 @@ error_reporting(E_ALL);
             box-shadow: 0 0 10px var(--primary-light);
         }
         .status-off {
-            background: #F44336;
-            box-shadow: 0 0 10px #F44336;
+            background:
+            box-shadow: 0 0 10px
         }
         .theme-toggle {
             position: static;
@@ -326,10 +326,10 @@ error_reporting(E_ALL);
                 </div>
                 <?php
                 $stmt = $pdo->prepare("
-                    SELECT lamp_state, curtains_state, created_at 
-                    FROM sensor_data 
-                    WHERE user_id = ? 
-                    ORDER BY created_at DESC 
+                    SELECT lamp_state, curtains_state, created_at
+                    FROM sensor_data
+                    WHERE user_id = ?
+                    ORDER BY created_at DESC
                     LIMIT 1
                 ");
                 $stmt->execute([$user_id]);
@@ -361,7 +361,7 @@ error_reporting(E_ALL);
             <?php endif;
         } catch (Exception $e) {
             echo '<div class="info-block"><p>Ошибка: ' . htmlspecialchars($e->getMessage()) . '</p></div>';
-        } 
+        }
         ?>
         <div id="copyStatus" class="status"></div>
         <div class="footer-info" itemprop="dateModified" content="<?php echo date('c'); ?>">
@@ -418,4 +418,4 @@ error_reporting(E_ALL);
         });
     </script>
 </body>
-</html> 
+</html>

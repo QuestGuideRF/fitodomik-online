@@ -57,4 +57,4 @@ try {
         'success' => false,
         'message' => 'Ошибка сервера: ' . $e->getMessage()
     ]);
-} 
+}

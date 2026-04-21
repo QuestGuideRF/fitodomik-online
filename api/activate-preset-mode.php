@@ -20,26 +20,26 @@ $user_id = $_SESSION['user_id'];
 try {
     try {
         $stmt = $pdo->prepare("
-            SHOW KEYS FROM event_log 
+            SHOW KEYS FROM event_log
             WHERE Key_name = 'PRIMARY'
         ");
         $stmt->execute();
         $hasPrimaryKey = (bool) $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$hasPrimaryKey) {
             $stmt = $pdo->prepare("
-                SHOW COLUMNS FROM event_log 
+                SHOW COLUMNS FROM event_log
                 LIKE 'id'
             ");
             $stmt->execute();
             $hasIdColumn = (bool) $stmt->fetch(PDO::FETCH_ASSOC);
             if ($hasIdColumn) {
                 $pdo->exec("
-                    ALTER TABLE event_log 
+                    ALTER TABLE event_log
                     MODIFY id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
                 ");
             } else {
                 $pdo->exec("
-                    ALTER TABLE event_log 
+                    ALTER TABLE event_log
                     ADD COLUMN id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST
                 ");
             }
@@ -50,18 +50,18 @@ try {
     function safeLogEvent($pdo, $userId, $eventType, $description) {
         try {
             $stmt = $pdo->prepare("
-                SELECT COUNT(*) 
-                FROM event_log 
-                WHERE user_id = ? 
-                AND event_type = ? 
-                AND event_description = ? 
+                SELECT COUNT(*)
+                FROM event_log
+                WHERE user_id = ?
+                AND event_type = ?
+                AND event_description = ?
                 AND created_at >= DATE_SUB(NOW(), INTERVAL 10 MINUTE)
             ");
             $stmt->execute([$userId, $eventType, $description]);
             $count = $stmt->fetchColumn();
             if ($count == 0) {
                 $stmt = $pdo->prepare("
-                    INSERT INTO event_log (user_id, event_type, event_description) 
+                    INSERT INTO event_log (user_id, event_type, event_description)
                     VALUES (?, ?, ?)
                 ");
                 $stmt->execute([$userId, $eventType, $description]);
@@ -78,9 +78,9 @@ try {
         throw new Exception('Режим не найден или вам не принадлежит');
     }
     $checkThresholdTable = $pdo->prepare("
-        SELECT COUNT(*) 
-        FROM information_schema.TABLES 
-        WHERE TABLE_SCHEMA = DATABASE() 
+        SELECT COUNT(*)
+        FROM information_schema.TABLES
+        WHERE TABLE_SCHEMA = DATABASE()
         AND TABLE_NAME = 'alarm_thresholds'
     ");
     $checkThresholdTable->execute();
@@ -106,10 +106,10 @@ try {
     $humidity_min_limit = max(0, $mode['humidity'] - $mode['humidity_tolerance']);
     $humidity_max_limit = min(100, $mode['humidity'] + $mode['humidity_tolerance']);
     $stmtTemp = $pdo->prepare("
-        INSERT INTO alarm_thresholds 
-        (user_id, parameter_type, min_limit, max_limit, target_value, tolerance) 
+        INSERT INTO alarm_thresholds
+        (user_id, parameter_type, min_limit, max_limit, target_value, tolerance)
         VALUES (?, 'temperature', ?, ?, ?, ?)
-        ON DUPLICATE KEY UPDATE 
+        ON DUPLICATE KEY UPDATE
         min_limit = VALUES(min_limit),
         max_limit = VALUES(max_limit),
         target_value = VALUES(target_value),
@@ -123,10 +123,10 @@ try {
         $mode['tolerance']
     ]);
     $stmtHumidity = $pdo->prepare("
-        INSERT INTO alarm_thresholds 
-        (user_id, parameter_type, min_limit, max_limit, target_value, tolerance) 
+        INSERT INTO alarm_thresholds
+        (user_id, parameter_type, min_limit, max_limit, target_value, tolerance)
         VALUES (?, 'humidity_air', ?, ?, ?, ?)
-        ON DUPLICATE KEY UPDATE 
+        ON DUPLICATE KEY UPDATE
         min_limit = VALUES(min_limit),
         max_limit = VALUES(max_limit),
         target_value = VALUES(target_value),
@@ -143,20 +143,20 @@ try {
     $checkLighting->execute([$user_id]);
     if ($checkLighting->fetchColumn() == 0) {
         $createLighting = $pdo->prepare("
-            INSERT INTO lighting_schedule 
-            (user_id, required_hours, start_time, end_time, is_exception) 
+            INSERT INTO lighting_schedule
+            (user_id, required_hours, start_time, end_time, is_exception)
             VALUES (?, ?, ?, ?, 0)
         ");
         $createLighting->execute([
-            $user_id, 
-            $mode['light_hours'], 
-            $mode['light_start'], 
+            $user_id,
+            $mode['light_hours'],
+            $mode['light_start'],
             $mode['light_end']
         ]);
     } else {
         $stmtLighting = $pdo->prepare("
-            UPDATE lighting_schedule 
-            SET required_hours = ?, start_time = ?, end_time = ? 
+            UPDATE lighting_schedule
+            SET required_hours = ?, start_time = ?, end_time = ?
             WHERE user_id = ? AND is_exception = 0
         ");
         $stmtLighting->execute([

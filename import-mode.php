@@ -22,11 +22,11 @@ if (!empty($code)) {
                 $error = 'Этот режим уже принадлежит вам';
             } else {
                 $stmt = $pdo->prepare("
-                    INSERT INTO preset_modes 
-                    (user_id, name, description, temperature, tolerance, 
-                     humidity, humidity_tolerance, light_hours, 
-                     light_start, light_end, created_at) 
-                    VALUES 
+                    INSERT INTO preset_modes
+                    (user_id, name, description, temperature, tolerance,
+                     humidity, humidity_tolerance, light_hours,
+                     light_start, light_end, created_at)
+                    VALUES
                     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
                 ");
                 $newName = $mode['name'] . ' (импорт)';
@@ -184,4 +184,4 @@ if (!empty($code)) {
     <?php include 'components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

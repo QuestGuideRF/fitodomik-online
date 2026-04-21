@@ -1,11 +1,11 @@
 <?php
 require_once 'config/database.php';
 $isGuest = !isset($_SESSION['user_id']);
-$user_id = $isGuest ? 1 : $_SESSION['user_id']; 
+$user_id = $isGuest ? 1 : $_SESSION['user_id'];
 $stmt = $pdo->prepare("
-    SELECT COUNT(*) 
-    FROM information_schema.TABLES 
-    WHERE TABLE_SCHEMA = DATABASE() 
+    SELECT COUNT(*)
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = DATABASE()
     AND TABLE_NAME = 'alarm_thresholds'
 ");
 $stmt->execute();
@@ -27,8 +27,8 @@ if (!$thresholdsTableExists) {
     ");
 }
 $stmt = $pdo->prepare("
-    SELECT parameter_type, min_limit, max_limit, target_value, tolerance 
-    FROM alarm_thresholds 
+    SELECT parameter_type, min_limit, max_limit, target_value, tolerance
+    FROM alarm_thresholds
     WHERE user_id = ?
 ");
 $stmt->execute([$user_id]);
@@ -36,11 +36,11 @@ $thresholds = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $thresholds[$row['parameter_type']] = $row;
 }
-$temp_settings = isset($thresholds['temperature']) ? 
-    ['temperature' => round($thresholds['temperature']['target_value'], 1), 'tolerance' => round($thresholds['temperature']['tolerance'], 1)] : 
+$temp_settings = isset($thresholds['temperature']) ?
+    ['temperature' => round($thresholds['temperature']['target_value'], 1), 'tolerance' => round($thresholds['temperature']['tolerance'], 1)] :
     ['temperature' => 25.0, 'tolerance' => 1.0];
-$humidity_settings = isset($thresholds['humidity_soil']) ? 
-    ['humidity' => round($thresholds['humidity_soil']['target_value']), 'tolerance' => round($thresholds['humidity_soil']['tolerance'], 1)] : 
+$humidity_settings = isset($thresholds['humidity_soil']) ?
+    ['humidity' => round($thresholds['humidity_soil']['target_value']), 'tolerance' => round($thresholds['humidity_soil']['tolerance'], 1)] :
     ['humidity' => 60, 'tolerance' => 1.0];
 $stmt = $pdo->prepare("SELECT lamp_state, curtains_state FROM sensor_data WHERE user_id = ? ORDER BY created_at DESC LIMIT 1");
 $stmt->execute([$user_id]);
@@ -48,19 +48,19 @@ $device_states = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$device_states) {
     $device_states = ['lamp_state' => 0, 'curtains_state' => 0];
 }
-$temp_limits = isset($thresholds['temperature']) ? 
-    ['min_limit' => round($thresholds['temperature']['min_limit'], 1), 'max_limit' => round($thresholds['temperature']['max_limit'], 1)] : 
+$temp_limits = isset($thresholds['temperature']) ?
+    ['min_limit' => round($thresholds['temperature']['min_limit'], 1), 'max_limit' => round($thresholds['temperature']['max_limit'], 1)] :
     ['min_limit' => 15.0, 'max_limit' => 30.0];
-$humidity_limits = isset($thresholds['humidity_soil']) ? 
-    ['min_limit' => round($thresholds['humidity_soil']['min_limit']), 'max_limit' => round($thresholds['humidity_soil']['max_limit'])] : 
+$humidity_limits = isset($thresholds['humidity_soil']) ?
+    ['min_limit' => round($thresholds['humidity_soil']['min_limit']), 'max_limit' => round($thresholds['humidity_soil']['max_limit'])] :
     ['min_limit' => 40, 'max_limit' => 60];
-$co2_limits = isset($thresholds['co2']) ? 
-    ['min_limit' => round($thresholds['co2']['min_limit']), 'max_limit' => round($thresholds['co2']['max_limit'])] : 
+$co2_limits = isset($thresholds['co2']) ?
+    ['min_limit' => round($thresholds['co2']['min_limit']), 'max_limit' => round($thresholds['co2']['max_limit'])] :
     ['min_limit' => 600, 'max_limit' => 2000];
 $stmt = $pdo->prepare("
-    SELECT COUNT(*) 
-    FROM information_schema.TABLES 
-    WHERE TABLE_SCHEMA = DATABASE() 
+    SELECT COUNT(*)
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = DATABASE()
     AND TABLE_NAME = 'schedule'
 ");
 $stmt->execute();
@@ -93,12 +93,12 @@ if (!$scheduleTableExists) {
     }
 }
 $stmt = $pdo->prepare("
-    SELECT time, curtains_schedule, lighting_schedule 
-    FROM schedule 
-    WHERE user_id = ? 
-    ORDER BY CASE 
-        WHEN time LIKE '0:%' THEN 0 
-        WHEN time LIKE '1:%' THEN 1 
+    SELECT time, curtains_schedule, lighting_schedule
+    FROM schedule
+    WHERE user_id = ?
+    ORDER BY CASE
+        WHEN time LIKE '0:%' THEN 0
+        WHEN time LIKE '1:%' THEN 1
         WHEN time LIKE '2:%' THEN 2
         WHEN time LIKE '3:%' THEN 3
         WHEN time LIKE '4:%' THEN 4
@@ -203,19 +203,19 @@ function safeOutput($text) {
                 <div class="settings-row">
                     <div class="value-input">
                         <label for="temperature">Значение °C</label>
-                        <input type="number" id="temperature" min="20" max="50" step="0.1" 
+                        <input type="number" id="temperature" min="20" max="50" step="0.1"
                                value="<?php echo htmlspecialchars($temp_settings['temperature']); ?>" required
                                <?php echo $isGuest ? 'disabled' : ''; ?>
-                               aria-label="Установка температуры" 
+                               aria-label="Установка температуры"
                                title="Установите целевое значение температуры в градусах Цельсия"
                                placeholder="Целевая температура">
                     </div>
                     <div class="tolerance-input">
                         <label for="temperatureTolerance">Погрешность °C</label>
-                        <input type="number" id="temperatureTolerance" min="1" max="5" step="0.1" 
+                        <input type="number" id="temperatureTolerance" min="1" max="5" step="0.1"
                                value="<?php echo htmlspecialchars($temp_settings['tolerance']); ?>" required
                                <?php echo $isGuest ? 'disabled' : ''; ?>
-                               aria-label="Допустимое отклонение температуры" 
+                               aria-label="Допустимое отклонение температуры"
                                title="Установите допустимое отклонение от целевой температуры"
                                placeholder="Погрешность">
                     </div>
@@ -231,19 +231,19 @@ function safeOutput($text) {
                 <div class="settings-row">
                     <div class="value-input">
                         <label for="humidity">Значение %</label>
-                        <input type="number" id="humidity" min="30" max="99" 
+                        <input type="number" id="humidity" min="30" max="99"
                                value="<?php echo htmlspecialchars($humidity_settings['humidity']); ?>" required
                                <?php echo $isGuest ? 'disabled' : ''; ?>
-                               aria-label="Установка влажности почвы" 
+                               aria-label="Установка влажности почвы"
                                title="Установите целевое значение влажности почвы в процентах"
                                placeholder="Целевая влажность почвы">
                     </div>
                     <div class="tolerance-input">
                         <label for="humidityTolerance">Погрешность %</label>
-                        <input type="number" id="humidityTolerance" min="1" max="5" step="0.1" 
+                        <input type="number" id="humidityTolerance" min="1" max="5" step="0.1"
                                value="<?php echo htmlspecialchars($humidity_settings['tolerance']); ?>" required
                                <?php echo $isGuest ? 'disabled' : ''; ?>
-                               aria-label="Допустимое отклонение влажности почвы" 
+                               aria-label="Допустимое отклонение влажности почвы"
                                title="Установите допустимое отклонение от целевой влажности почвы"
                                placeholder="Погрешность">
                     </div>
@@ -320,13 +320,13 @@ function safeOutput($text) {
                             <p class="schedule-title">✅ Зеленое – поднято ⬆️, ☑ Серое – опущено ⬇️</p>
                             <div class="hours-grid" id="curtainsGrid">
                                 <?php foreach ($scheduleData as $row): ?>
-                                <?php 
+                                <?php
                                     $hour = explode('-', $row['time'])[0];
                                     $isCurtainActive = $row['curtains_schedule'] == 1;
                                     $curtainClass = $isCurtainActive ? 'active' : 'inactive';
                                 ?>
-                                <div class="hour-cell <?php echo $curtainClass; ?>" 
-                                     data-time="<?php echo $row['time']; ?>" 
+                                <div class="hour-cell <?php echo $curtainClass; ?>"
+                                     data-time="<?php echo $row['time']; ?>"
                                      data-type="curtains">
                                     <?php echo $hour; ?>
                                         </div>
@@ -349,13 +349,13 @@ function safeOutput($text) {
                             <p class="schedule-title">✅ Зеленое – включено 💡, ☑ Серое – выключено 🔌</p>
                             <div class="hours-grid" id="lightingGrid">
                                 <?php foreach ($scheduleData as $row): ?>
-                                <?php 
+                                <?php
                                     $hour = explode('-', $row['time'])[0];
                                     $isLightingActive = $row['lighting_schedule'] == 1;
                                     $lightingClass = $isLightingActive ? 'active' : 'inactive';
                                 ?>
-                                <div class="hour-cell <?php echo $lightingClass; ?>" 
-                                     data-time="<?php echo $row['time']; ?>" 
+                                <div class="hour-cell <?php echo $lightingClass; ?>"
+                                     data-time="<?php echo $row['time']; ?>"
                                      data-type="lighting">
                                     <?php echo $hour; ?>
                                         </div>
@@ -419,26 +419,26 @@ function safeOutput($text) {
     background: var(--primary-hover);
 }
 [data-theme="dark"] .limits-section {
-    background: var(--dark-card-bg, #2a2a2a);
+    background: var(--dark-card-bg,
 }
 [data-theme="dark"] .limit-input input {
-    background: var(--dark-input-bg, #333);
-    color: var(--dark-text, #fff);
-    border-color: var(--dark-border, #444);
+    background: var(--dark-input-bg,
+    color: var(--dark-text,
+    border-color: var(--dark-border,
 }
 .guest-notice {
     background-color: rgba(255, 193, 7, 0.2);
-    border-left: 4px solid #ffc107;
+    border-left: 4px solid
     padding: 10px 15px;
     margin-bottom: 20px;
     border-radius: 4px;
 }
 .guest-notice p {
     margin: 0;
-    color: var(--text-color, #555);
+    color: var(--text-color,
 }
 .guest-notice a {
-    color: #007bff;
+    color:
     text-decoration: none;
     font-weight: bold;
 }
@@ -446,7 +446,7 @@ function safeOutput($text) {
     text-decoration: underline;
 }
 button.disabled {
-    background-color: #cccccc !important;
+    background-color:
     cursor: not-allowed !important;
 }
 input:disabled {
@@ -457,7 +457,7 @@ input:disabled {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #4CAF50;
+    background-color:
     color: white;
     padding: 15px 25px;
     border-radius: 5px;
@@ -538,10 +538,10 @@ input:disabled {
     width: 100%;
 }
 .control-btn.green {
-    background-color: #4CAF50;
+    background-color:
 }
 .control-btn.red {
-    background-color: #f44336;
+    background-color:
 }
 .device-status {
     margin-bottom: 8px;
@@ -558,17 +558,17 @@ input:disabled {
     transition: background-color 0.3s;
 }
 .add-exception-btn {
-    background-color: #4CAF50;
+    background-color:
 }
 .add-exception-btn:hover {
-    background-color: #3e8e41;
+    background-color:
 }
 .save-settings {
-    background-color: #4CAF50;
+    background-color:
     margin-top: 10px;
 }
 .save-settings:hover {
-    background-color: #3e8e41;
+    background-color:
 }
 .schedule-block {
     background: var(--card-bg);
@@ -694,7 +694,7 @@ input:disabled {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #4CAF50;
+    background-color:
     color: white;
     padding: 15px 25px;
     border-radius: 5px;
@@ -703,7 +703,7 @@ input:disabled {
     animation: slideIn 0.3s ease-in-out;
 }
 .notification.error {
-    background-color: #f44336;
+    background-color:
 }
 @keyframes slideIn {
     from {
@@ -853,7 +853,7 @@ input:disabled {
     font-size: 32px;
     font-weight: bold;
     border-radius: 5px;
-    background-color: #222;
+    background-color:
     color: white;
     border: none;
     cursor: default;
@@ -901,12 +901,12 @@ input:disabled {
     transition: all 0.2s ease;
 }
 .hour-cell.active {
-    background-color: #4CAF50;
+    background-color:
     color: white;
 }
 .hour-cell.inactive {
-    background-color: #222;
-    color: #ccc;
+    background-color:
+    color:
 }
 .schedule-buttons {
     display: flex;
@@ -926,16 +926,16 @@ input:disabled {
     transition: background-color 0.3s;
 }
 .save-schedule {
-    background-color: #4CAF50;
+    background-color:
 }
 .save-schedule:hover {
-    background-color: #3e8e41;
+    background-color:
 }
 .reset-schedule {
-    background-color: #f44336;
+    background-color:
 }
 .reset-schedule:hover {
-    background-color: #d32f2f;
+    background-color:
 }
 @media (max-width: 767px) {
     .hours-grid {
@@ -1003,7 +1003,7 @@ function saveTemperature(suppressNotifications = false) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
             temperature: {
                 min: minLimit,
                 max: maxLimit,
@@ -1056,7 +1056,7 @@ function saveHumidity(suppressNotifications = false) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
             humidity_soil: {
                 min: minLimit,
                 max: maxLimit,
@@ -1250,4 +1250,4 @@ function saveSchedule(gridId, type, silentMode = false) {
         console.error('Ошибка запроса при сохранении расписания:', error);
     });
 }
-</script> 
+</script>

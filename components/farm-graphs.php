@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 $isGuest = !isset($_SESSION['user_id']);
-$user_id = $isGuest ? 1 : $_SESSION['user_id']; 
+$user_id = $isGuest ? 1 : $_SESSION['user_id'];
 function generateDemoDataForDay($type) {
     $data = [];
     $now = time();
@@ -25,7 +25,7 @@ function generateDemoDataForDay($type) {
             $maxChange = 8;
             break;
         case 'pressure':
-            $startValue = 750; 
+            $startValue = 750;
             $maxChange = 5;
             break;
         default:
@@ -33,8 +33,8 @@ function generateDemoDataForDay($type) {
             $maxChange = 10;
     }
     for ($i = 24; $i >= 0; $i--) {
-        $timeStamp = $now - ($i * 3600); 
-        $randomFactor = mt_rand(-100, 100) / 100; 
+        $timeStamp = $now - ($i * 3600);
+        $randomFactor = mt_rand(-100, 100) / 100;
         $variation = $randomFactor * $maxChange;
         $hourOfDay = (int)date('H', $timeStamp);
         $dayNightVariation = 0;
@@ -50,7 +50,7 @@ function generateDemoDataForDay($type) {
                 break;
             case 'soil_moisture':
                 $dayNightVariation = ($hourOfDay >= 9 && $hourOfDay <= 20) ? -3 : 2;
-                if ($hourOfDay == 7) $dayNightVariation = 10; 
+                if ($hourOfDay == 7) $dayNightVariation = 10;
                 break;
             case 'pressure':
                 $dayNightVariation = sin($hourOfDay/24 * 2 * M_PI) * 2;
@@ -59,19 +59,19 @@ function generateDemoDataForDay($type) {
         $value = $startValue + $variation + $dayNightVariation;
         switch ($type) {
             case 'temperature':
-                $value = max(15, min(35, $value)); 
+                $value = max(15, min(35, $value));
                 break;
             case 'humidity':
-                $value = max(30, min(80, $value)); 
+                $value = max(30, min(80, $value));
                 break;
             case 'co2':
-                $value = max(400, min(2000, $value)); 
+                $value = max(400, min(2000, $value));
                 break;
             case 'soil_moisture':
-                $value = max(20, min(90, $value)); 
+                $value = max(20, min(90, $value));
                 break;
             case 'pressure':
-                $value = max(980, min(1040, $value)); 
+                $value = max(980, min(1040, $value));
                 break;
         }
         $data[] = [
@@ -104,7 +104,7 @@ function generateDemoDataForWeek($type) {
             $maxChange = 10;
             break;
         case 'pressure':
-            $startValue = 750; 
+            $startValue = 750;
             $maxChange = 8;
             break;
         default:
@@ -112,8 +112,8 @@ function generateDemoDataForWeek($type) {
             $maxChange = 10;
     }
     for ($i = 42; $i >= 0; $i--) {
-        $timeStamp = $now - ($i * 14400); 
-        $randomFactor = mt_rand(-100, 100) / 100; 
+        $timeStamp = $now - ($i * 14400);
+        $randomFactor = mt_rand(-100, 100) / 100;
         $variation = $randomFactor * $maxChange;
         $dayOfWeek = (int)date('w', $timeStamp);
         $hourOfDay = (int)date('H', $timeStamp);
@@ -128,12 +128,12 @@ function generateDemoDataForWeek($type) {
                 $dayVariation += ($hourOfDay >= 8 && $hourOfDay <= 18) ? -3 : 5;
                 break;
             case 'co2':
-                $dayVariation = $dayOfWeek * 30; 
+                $dayVariation = $dayOfWeek * 30;
                 $dayVariation += ($hourOfDay >= 10 && $hourOfDay <= 20) ? 100 : -50;
                 break;
             case 'soil_moisture':
                 $dayVariation = $dayOfWeek * -0.5;
-                if ($hourOfDay == 7) $dayVariation += 10; 
+                if ($hourOfDay == 7) $dayVariation += 10;
                 break;
             case 'pressure':
                 $dayVariation = sin($dayOfWeek/7 * 2 * M_PI) * 4 + sin($hourOfDay/24 * 2 * M_PI) * 2;
@@ -142,19 +142,19 @@ function generateDemoDataForWeek($type) {
         $value = $startValue + $variation + $dayVariation;
         switch ($type) {
             case 'temperature':
-                $value = max(15, min(35, $value)); 
+                $value = max(15, min(35, $value));
                 break;
             case 'humidity':
-                $value = max(30, min(80, $value)); 
+                $value = max(30, min(80, $value));
                 break;
             case 'co2':
-                $value = max(400, min(2000, $value)); 
+                $value = max(400, min(2000, $value));
                 break;
             case 'soil_moisture':
-                $value = max(20, min(90, $value)); 
+                $value = max(20, min(90, $value));
                 break;
             case 'pressure':
-                $value = max(980, min(1040, $value)); 
+                $value = max(980, min(1040, $value));
                 break;
         }
         $data[] = [
@@ -171,13 +171,13 @@ function getDayData($pdo, $user_id, $type) {
     }
     $validColumns = ['temperature', 'humidity', 'soil_moisture', 'co2', 'pressure'];
     if (!in_array($type, $validColumns)) {
-        return []; 
+        return [];
     }
-    $query = "SELECT 
+    $query = "SELECT
                 DATE_FORMAT(created_at, '%H:%i') as time,
                 ROUND(AVG($type), 2) as value
-             FROM sensor_data 
-             WHERE user_id = ? 
+             FROM sensor_data
+             WHERE user_id = ?
              AND created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)
              AND $type IS NOT NULL
              GROUP BY HOUR(created_at), MINUTE(created_at)
@@ -198,13 +198,13 @@ function getWeekData($pdo, $user_id, $type) {
     }
     $validColumns = ['temperature', 'humidity', 'soil_moisture', 'co2', 'pressure'];
     if (!in_array($type, $validColumns)) {
-        return []; 
+        return [];
     }
-    $query = "SELECT 
+    $query = "SELECT
                 DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') as datetime,
                 ROUND(AVG($type), 2) as value
-             FROM sensor_data 
-             WHERE user_id = ? 
+             FROM sensor_data
+             WHERE user_id = ?
              AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
              AND $type IS NOT NULL
              GROUP BY DATE(created_at), HOUR(created_at)
@@ -556,20 +556,20 @@ document.addEventListener('DOMContentLoaded', function() {
     margin: 20px 0;
 }
 [data-theme="dark"] .graphs-container {
-    background: var(--dark-card-bg, #2a2a2a);
+    background: var(--dark-card-bg,
 }
 [data-theme="dark"] .graph-display {
-    background: var(--dark-bg, #1a1a1a);
+    background: var(--dark-bg,
 }
 [data-theme="dark"] .graph-btn,
 [data-theme="dark"] .period-btn {
-    background: var(--dark-button-bg, #333);
-    color: var(--dark-text, #fff);
-    border-color: var(--dark-border, #444);
+    background: var(--dark-button-bg,
+    color: var(--dark-text,
+    border-color: var(--dark-border,
 }
 [data-theme="dark"] .graph-btn:hover,
 [data-theme="dark"] .period-btn:hover {
-    background: var(--dark-hover, #444);
+    background: var(--dark-hover,
 }
 [data-theme="dark"] .graph-btn.active,
 [data-theme="dark"] .period-btn.active {
@@ -648,12 +648,10 @@ document.addEventListener('DOMContentLoaded', function() {
     color: var(--error-text);
     margin: 0 0 10px 0;
 }
-#errorList {
     margin: 0;
     padding-left: 20px;
     color: var(--error-text);
 }
-#errorList li {
     margin-bottom: 5px;
 }
 .graphs-content {
@@ -696,7 +694,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 .guest-notice {
     background-color: rgba(255, 193, 7, 0.2);
-    border-left: 4px solid #ffc107;
+    border-left: 4px solid
     padding: 10px 15px;
     border-radius: 4px;
     width: 100%;
@@ -704,20 +702,19 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 .guest-notice p {
     margin: 0;
-    color: var(--text-color, #555);
+    color: var(--text-color,
     white-space: normal;
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
 .guest-notice a {
-    color: #007bff;
+    color:
     text-decoration: none;
     font-weight: bold;
 }
 .guest-notice a:hover {
     text-decoration: underline;
 }
-/* Остальные стили */
 .data-info-container {
     width: 100%;
     margin-bottom: 20px;
@@ -725,7 +722,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 .data-info {
     background-color: rgba(13, 110, 253, 0.1);
-    border-left: 4px solid #0d6efd;
+    border-left: 4px solid
     padding: 10px 15px;
     border-radius: 4px;
     width: 100%;
@@ -733,9 +730,9 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 .data-info p {
     margin: 0;
-    color: var(--text-color, #333);
+    color: var(--text-color,
     white-space: normal;
     overflow-wrap: break-word;
     word-wrap: break-word;
 }
-</style> 
+</style>

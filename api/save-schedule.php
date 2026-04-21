@@ -31,14 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->beginTransaction();
         if ($type === 'curtains') {
             $stmt = $pdo->prepare("
-                UPDATE schedule 
-                SET curtains_schedule = :active 
+                UPDATE schedule
+                SET curtains_schedule = :active
                 WHERE user_id = :user_id AND time = :time
             ");
-        } else { 
+        } else {
             $stmt = $pdo->prepare("
-                UPDATE schedule 
-                SET lighting_schedule = :active 
+                UPDATE schedule
+                SET lighting_schedule = :active
                 WHERE user_id = :user_id AND time = :time
             ");
         }
@@ -60,4 +60,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     echo json_encode(['success' => false, 'message' => 'Метод не поддерживается']);
 }
-?> 
+?>

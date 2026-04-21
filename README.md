@@ -112,7 +112,7 @@ graph TD
         C[Python GUI] --> D[fitodomik.py]
         E[Telegram Bot]
     end
-    
+
     subgraph "Серверная часть"
         B --> F[Компоненты UI]
         F --> G[farm-status.php]
@@ -122,39 +122,39 @@ graph TD
         F --> K[preset-modes.php]
         F --> L[planting-calendar.php]
         F --> M[event-log.php]
-        
+
         B --> N[Аутентификация]
         N --> O[login.php]
         N --> P[register.php]
         N --> Q[profile.php]
         N --> R[telegram_verify.php]
-        
+
         B --> S[API Layer]
         D --> S
         E --> S
-        
+
         S --> T[Датчики API]
         T --> U[save-sensor-data.php]
         T --> V[upload-image.php]
         T --> W[get-max-sensor-id.php]
-        
+
         S --> X[Настройки API]
         X --> Y[get-schedule.php]
         X --> Z[save-schedule.php]
         X --> AA[get-thresholds.php]
         X --> AB[save-limits.php]
-        
+
         S --> AC[Пресеты API]
         AC --> AD[save-preset-mode.php]
         AC --> AE[share-preset-mode.php]
         AC --> AF[import-preset-mode.php]
-        
+
         S --> AG[События API]
         AG --> AH[load-planting-events.php]
         AG --> AI[save-planting-event.php]
         AG --> AJ[clear-event-log.php]
     end
-    
+
     subgraph "Оборудование"
         D --> AK[Arduino]
         AK --> AL[BME280]
@@ -167,7 +167,7 @@ graph TD
         AP --> AS[Насос]
         AP --> AT[Вентилятор]
     end
-    
+
     subgraph "База данных"
         S --> AU[MySQL]
         AU --> AV[users]
@@ -192,26 +192,26 @@ sequenceDiagram
     participant Python as Python App
     participant Arduino as Arduino
     participant Sensors as Датчики
-    
+
     Sensors->>Arduino: Данные датчиков
     Arduino->>Python: Данные через Serial
     Python->>API: POST /save-sensor-data.php
     API->>DB: Сохранение данных
-    
+
     Python->>API: POST /upload-image.php
     API->>DB: Сохранение фото
-    
+
     User->>Web: Запрос страницы
     Web->>API: GET /get-farm-status.php
     API->>DB: Запрос данных
     DB->>API: Результат
     API->>Web: JSON данные
     Web->>User: Отображение интерфейса
-    
+
     User->>Web: Изменение настроек
     Web->>API: POST /save-limits.php
     API->>DB: Обновление настроек
-    
+
     Python->>API: GET /get-thresholds.php
     API->>DB: Запрос настроек
     DB->>API: Результат
@@ -369,7 +369,7 @@ $components = [
 
 **`authentication/login.php` - Безопасный вход в систему**
 - **Функции**: Проверка учетных данных с защитой от брутфорса
-- **Безопасность**: 
+- **Безопасность**:
   - Хеширование паролей через `password_hash()` с солью
   - Защита от временных атак через `password_verify()`
   - Блокировка IP после неудачных попыток
@@ -412,7 +412,7 @@ $components = [
 - **Безопасность**: Проверка прав доступа к данным пользователя
 
 #### **`components/farm-settings.php` - Центр управления климатом**
-- **Функции**: 
+- **Функции**:
   - Настройка целевых значений температуры и влажности почвы
   - Управление расписанием освещения и штор
   - Отображение текущих активных временных интервалов
@@ -434,7 +434,7 @@ $components = [
 - **Автоматизация**: Автоматические действия при превышении порогов
 
 #### **`components/preset-modes.php` - Система управления пресетами**
-- **Функции**: 
+- **Функции**:
   - Сохранение и загрузка готовых конфигураций
   - Шаринг настроек между пользователями
   - Импорт/экспорт через коды доступа
@@ -581,9 +581,9 @@ $components = [
 
 ### **Web-приложение (Сервер)**
 1. **Точка входа**: `index.php` - универсальная страница для всех пользователей
-2. **Инициализация безопасности**: 
+2. **Инициализация безопасности**:
    - Подключение к БД с проверкой целостности (`config/database.php`)
-   - Безопасный старт сессии с ротацией ID (`config/session.php`) 
+   - Безопасный старт сессии с ротацией ID (`config/session.php`)
    - Загрузка системы безопасности (`security/security_bootstrap.php`)
    - Установка защитных HTTP заголовков
 3. **Рендеринг интерфейса**: Модульное подключение компонентов из `components/`
@@ -669,7 +669,7 @@ class SensorHistory:          # История показаний датчико
 
 ### 📱 Адаптивный дизайн
 - **Темная тема**: Полная поддержка с переключением через localStorage
-- **Мобильная адаптивность**: CSS Grid с breakpoints для всех устройств  
+- **Мобильная адаптивность**: CSS Grid с breakpoints для всех устройств
 - **PWA готовность**: Манифест и иконки для установки как приложение
 - **Доступность (A11y)**: ARIA-атрибуты, правильная семантика, поддержка скринридеров
 
@@ -685,7 +685,7 @@ class SensorHistory:          # История показаний датчико
 
 #### Почему PHP без фреймворков?
 - **Простота развертывания**: Работает на любом хостинге
-- **Низкий порог входа**: Легко понять и модифицировать  
+- **Низкий порог входа**: Легко понять и модифицировать
 - **Производительность**: Отсутствие overhead'а фреймворков
 - **Контроль**: Полный контроль над каждой строкой кода
 
@@ -697,7 +697,7 @@ class SensorHistory:          # История показаний датчико
 
 #### Почему IndexedDB для кеширования?
 - **Оффлайн работа**: Данные доступны без интернета
-- **Производительность**: Быстрый доступ к часто используемым данным  
+- **Производительность**: Быстрый доступ к часто используемым данным
 - **Объем**: Больше места чем localStorage
 - **Структурированность**: Поддержка индексов и запросов
 
@@ -773,17 +773,47 @@ class SensorHistory:          # История показаний датчико
 
 # 🌱 Проект **ФитоДомик**
 
-⭐ **Основной репозиторий проекта ФитоДомик**  
+⭐ **Основной репозиторий проекта ФитоДомик**
 [👉 GitHub: FitoDomik_project](https://github.com/FitoDomik/FitoDomik_project)
 
-📌 **Сайт-визитка проекта**  
+📌 **Сайт-визитка проекта**
 [👉 GitHub: fitodomik.ru](https://github.com/FitoDomik/fitodomik.ru)
 
-💻 **Сайт для управления умной фермой**  
+💻 **Сайт для управления умной фермой**
 [👉 GitHub: fitodomik.online](https://github.com/FitoDomik/fitodomik.online)
-
-
 
 ---
 Автор: legenda_god
 Telegram: https://t.me/FitoDomik
+## Настройка секретов и окружения
+
+Рабочий файл с секретами не хранится в git. Для настройки используйте шаблон `config/env.example.php`.
+
+1. Скопируйте `config/env.example.php` в `config/env.php`.
+2. Заполните доступ к БД, Telegram и ключ для виджета.
+3. Проверьте, что `config/database.php` и `config/telegram.php` читают значения из `config/env.php`.
+4. Не коммитьте `config/env.php` обратно в репозиторий.
+
+Обязательные значения:
+
+- `DB_HOST`
+- `DB_NAME`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+- `TELEGRAM_BOT_TOKEN`
+- `WIDGET_API_KEY`
+
+Пример:
+
+```php
+<?php
+return [
+    'DB_HOST' => 'localhost',
+    'DB_NAME' => 'change_me',
+    'DB_USERNAME' => 'change_me',
+    'DB_PASSWORD' => 'change_me',
+    'TELEGRAM_BOT_TOKEN' => 'change_me',
+    'APP_ENV' => 'production',
+    'WIDGET_API_KEY' => 'change_me',
+];
+```

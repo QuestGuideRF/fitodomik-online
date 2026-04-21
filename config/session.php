@@ -33,4 +33,4 @@ function getGreeting() {
     } else {
         return 'Добрый вечер';
     }
-} 
+}

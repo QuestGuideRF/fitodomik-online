@@ -1,6 +1,6 @@
 <?php
 require_once '../config/database.php';
-require_once '../config/headers.php'; 
+require_once '../config/headers.php';
 session_start();
 header('Content-Type: application/json');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
@@ -31,12 +31,12 @@ try {
         $start_date = sprintf('%04d-01-01', $year);
         $end_date = sprintf('%04d-12-31', $year);
     }
-    $sql = "SELECT 
-                e.id, e.user_id, e.type, e.plant_name, e.event_date, e.event_time, e.notes, e.created_at, 
-                r.id as reminder_id, r.reminder_date, r.reminder_time, r.is_shown as reminder_shown 
+    $sql = "SELECT
+                e.id, e.user_id, e.type, e.plant_name, e.event_date, e.event_time, e.notes, e.created_at,
+                r.id as reminder_id, r.reminder_date, r.reminder_time, r.is_shown as reminder_shown
             FROM planting_events e
             LEFT JOIN planting_reminders r ON e.id = r.event_id
-            WHERE e.user_id = :user_id 
+            WHERE e.user_id = :user_id
               AND e.event_date BETWEEN :start_date AND :end_date
             ORDER BY e.event_date, e.event_time";
     $stmt = $pdo->prepare($sql);
@@ -79,4 +79,4 @@ try {
     error_log('Общая ошибка при загрузке событий: ' . $e->getMessage());
     sendJsonResponse(false, 'Произошла ошибка при загрузке событий: ' . $e->getMessage());
 }
-?> 
+?>

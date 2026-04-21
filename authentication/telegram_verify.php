@@ -65,7 +65,7 @@ $bot_username = TELEGRAM_BOT_USERNAME;
                 .then(data => {
                     console.log('Ответ от сервера:', data);
                     if (data.verified) {
-                        statusDiv.innerHTML = 
+                        statusDiv.innerHTML =
                             '<div class="success-message">Верификация успешно завершена!</div>';
                         setTimeout(() => {
                             window.location.href = '../index.php';
@@ -85,4 +85,4 @@ $bot_username = TELEGRAM_BOT_USERNAME;
     </script>
     <script src="js/theme.js"></script>
 </body>
-</html> 
+</html>

@@ -1,7 +1,7 @@
 <?php
 require_once 'config/database.php';
 require_once 'config/session.php';
-require_once 'security/security_bootstrap.php'; 
+require_once 'security/security_bootstrap.php';
 $user = null;
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
@@ -124,7 +124,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </header>
     <main class="container" itemprop="mainContentOfPage">
-        <?php 
+        <?php
         $components = [
             'components/farm-status.php',
             'components/farm-settings.php',
@@ -145,4 +145,4 @@ if (isset($_SESSION['user_id'])) {
         <meta itemprop="dateModified" content="<?php echo date('c'); ?>">
     </footer>
 </body>
-</html> 
+</html>

@@ -1,7 +1,7 @@
 <?php
 require_once 'config/database.php';
 require_once 'config/session.php';
-require_once 'security/security_bootstrap.php'; 
+require_once 'security/security_bootstrap.php';
 $user = null;
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
